@@ -9,14 +9,14 @@ function RegisterPage(props) {
     const dispatch = useDispatch();
 
     //state 설정
-    const [Id, setId] = useState("")
+    const [email, setEmail] = useState("")
     const [Name, setName] = useState("")
     const [Password, setPassword] = useState("")
     const [ConfirmPassword, setConfirmPassword] = useState("")
 
     //onChange 처리
-    const onIdHandler = (event) => {
-        setId(event.currentTarget.value)
+    const onEmailHandler = (event) => {
+        setEmail(event.currentTarget.value)
     }
     const onNameHandler = (event) => {
         setName(event.currentTarget.value)
@@ -40,14 +40,14 @@ function RegisterPage(props) {
 
         //서버로 전달할 state값을 모은 객체
         let body = {
-            Id: Id,
+            email: email,
             password: Password,
             name: Name,
         }
 
         //서버로 전달할 임시 프로필 객체
         const profile = {
-            id: Id,
+            email: email,
             nickName: Name,
             profileImg: "",
             content: "",
@@ -89,8 +89,8 @@ function RegisterPage(props) {
                     모아에서 더 많은 활동을 감상하세요!
                 </p>
 
-                <label>아이디</label>
-                <Input value={Id} placeholder="아이디" onChange={onIdHandler} />
+                <label>이메일</label>
+                <Input value={email} placeholder="아이디" onChange={onEmailHandler} />
 
                 <label>이름</label>
                 <Input type="text" value={Name} placeholder="이름" onChange={onNameHandler} />

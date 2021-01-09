@@ -1,6 +1,7 @@
 import React from 'react'
-import './MainPage.css'
-import Slider from '@bit/akiran.react-slick.slider';
+import '../Mainpage.css'
+// import Slider from '@bit/akiran.react-slick.slider';
+import AliceCarousel from 'react-alice-carousel';
 
 function CurrentExhibitPage() {
     const settings = {
@@ -14,9 +15,9 @@ function CurrentExhibitPage() {
         <div   style={{backgroundColor:"#D1ECEF",backgroundSize:"100%",height:"100vh",marginTop:"250px"}}>
             <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-				<style>{cssstyle}</style>
+				{/* <style>{cssstyle}</style> */}
         <h2> Multiple items </h2>
-        <Slider {...settings}>
+        <AliceCarousel>
           <div>
             <h3 className="maincurrentextesth3">1</h3>
           </div>
@@ -44,7 +45,7 @@ function CurrentExhibitPage() {
           <div>
             <h3 className="maincurrentextesth3">9</h3>
           </div>
-        </Slider>
+        </AliceCarousel>
         </div>
     )
 }

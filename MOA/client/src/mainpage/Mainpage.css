@@ -4,7 +4,7 @@
     
 }
 .mainfirst{
-    background-image: url('../pictures/home_mainback.png');
+    background-image: url('./pictures/home_mainback.png');
     height: 700px;
     background-size: 100% 700px;
     border-bottom: none;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import Axios from 'axios';
-import '../MainPage.css';
+import '../Mainpage.css';
 
 function MainLivePage(){
     return (

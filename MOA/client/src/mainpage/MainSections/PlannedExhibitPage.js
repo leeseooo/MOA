@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card } from 'antd';
 import Axios from 'axios';
-import '../MainPage.css';
+import '../Mainpage.css';
 import './PlannedExhibitPage.css';
 
 function PlannedExhibitPage() {
