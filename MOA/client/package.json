@@ -7,7 +7,11 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.10.0",
+<<<<<<< HEAD
+    "http-proxy-middleware": "^1.0.6",
+=======
     "axios": "^0.21.1",
+>>>>>>> 151b77d95046c066bcd5b88e65f138b3d684c9c3
     "npm-merge-driver": "^2.3.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
