@@ -1,7 +1,9 @@
 import React , {useEffect, useState} from 'react'
 import { List, Avatar, Row, Col, Tag } from 'antd'
 import moment from 'moment';
+import SideVideo from './Sections/SideVideo'
 import Comment from './Sections/Comment'
+import Subscriber from './Sections/Subscriber'
 import axios from 'axios'
 
 function VideoDetailPage(props){
@@ -72,7 +74,7 @@ function VideoDetailPage(props){
                 </div>
             </Col>
             <Col lg={6} xs={24}>
-                {/* <SideVideo /> */}
+                <SideVideo />
             </Col>
         </Row>
     )

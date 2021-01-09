@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Divider, Avatar } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
-
 import "antd/dist/antd.css";
 
 const { Meta } = Card;
@@ -61,31 +60,6 @@ function ResultBooths(props) {
         //     })
 
     }, [props.alignType])
-
-    const renderCards = Video.map((video, index)=>{
-        return <Col key={index}>
-            <div>
-                <img style={{width:'100%'}} src />
-                <div style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
-                    color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
-                    padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
-                    fontWeight:'500', lineHeight:'12px'}}>
-                        {/* 동영상 분 초 보여주기 */}
-                    </div>
-            </div>
-            <Meta avatar={
-                <Avatar src />
-            }
-            title={video.title}
-            />
-            <span>{video.writer.name}</span><br />
-            <span style={{marginLeft:'3rem'}}>{video.views}</span>
-            - <span> {moment(video.createdAt).format("YYYY-MM-DD")} </span>
-        </Col>
-    })
-    const renderImageCards = Image.map((image, index)=>{
-        return <div></div>
-    })
 
     //현재, 예정, 지난 부스로 구분
     const sortBooths = (sort) => {
@@ -159,41 +133,59 @@ function ResultBooths(props) {
                 })
                 break;
         }
-
-        var renderCards = Video.map((video, index) => {
-
-            let minutes = Math.floor(video.duration / 60);
-            let seconds = Math.floor(video.duration - minutes * 60);
-            return (
-                <Col lg={6} md={8} xs={24} key={index}>
+    }
+        const renderCards = Video.map((video, index)=>{
+            var minutes = Math.floor(video.duration / 60);
+            var seconds = Math.floor(video.duration - minutes * 60);
+        
+            return <Col lg={6} md={8} xs={24} key={index}>
                     <div style={{ position: 'relative' }}>
-                        <a href={`/video/${video._id}`}>
-                            <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
-                            <div style={{
-                                bottom: 0, right: 0, position: 'absolute', margin: '4px',
-                                color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
-                                padding: '2px 4px', borderRadius: '2px', letterSpacing: '0.5px', fontSize: '12px',
-                                fontWeight: '500', lineHeight: '12px'
-                            }}
-                            >
-                                <span>{minutes} : {seconds}</span>
-                            </div>
+                        <a href={`/video/${video._id}`} >
+                        <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
+                        <div className=" duration"
+                            style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
+                            color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
+                            padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
+                            fontWeight:'500', lineHeight:'12px' }}>
+                            <span>{minutes} : {seconds}</span>
+                        </div>
                         </a>
-                    </div>
-                    <br />
-                    <Card.Meta
-                        avatar={<Avatar src={video.writer.image} />}
+                    </div><br />
+                    <Meta
+                        avatar={
+                            <Avatar src={video.writer.image} />
+                        }
                         title={video.title}
                     />
-                    <span>{video.writer.name}</span><br />
-                    <span style={{ marginLeft: '3rem' }}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM Do YY")}</span>
+                    <span>{video.writer.name} </span><br />
+                    <span style={{ marginLeft: '3rem' }}> {video.views}</span>
+                    - <span> {moment(video.createdAt).format("YYYY-MM-DD")} </span>
                 </Col>
-
-            )
-        })
-
-        return renderCards
-    }
+          })
+          const renderImageCards = Image.map((image, index)=>{
+            return <Col lg={6} md={8} xs={24} key={index}>
+                    <div style={{ position: 'relative' }}>
+                        <a href={`/post/${image._id}`} >
+                        <img style={{ width: '100%' }} src={`http://localhost:5000/${image.filePath[0]}`}/>
+                        <div className=" duration"
+                            style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
+                            color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
+                            padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
+                            fontWeight:'500', lineHeight:'12px' }}>
+                        </div>
+                        </a>
+                    </div><br />
+                    <Meta
+                        avatar={
+                            <Avatar src={image.writer.image} />
+                        }
+                        title={image.title}
+                    />
+                    <span>{image.writer.name} </span><br />
+                    <span style={{ marginLeft: '3rem' }}> {image.views}</span>
+                    - <span> {moment(image.createdAt).format("YYYY-MM-DD")} </span>
+                </Col>
+          })
 
     //부스 정렬
     const alignBooths = (booths) => {
@@ -447,7 +439,7 @@ function ResultBooths(props) {
                 justifyContent: 'center',
             }}>
                 <div style={{ width: "1200px" }}>
-                    {alignVideo()}
+                    {alignVideo()}{renderCards}
                 </div>
             </div>
             <Divider style={{ margin: "50px 0 70px 0" }}>현재 아트</Divider>
@@ -456,7 +448,7 @@ function ResultBooths(props) {
                 justifyContent: 'center',
             }}>
                 <div style={{ width: "1200px" }}>
-                    {boothsLayout("current")}
+                    {boothsLayout("current")}{renderImageCards}
                 </div>
             </div>
 
@@ -481,5 +473,6 @@ function ResultBooths(props) {
         </div>
     )
 }
+
 
 export default ResultBooths;
