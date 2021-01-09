@@ -16,8 +16,8 @@ export const SidebarData=[
         cName:'nav-text'
     },
     {
-        title:'부스생성',
-        path:'/video/upload',
+        title:'이미지 업로드',
+        path:'/image',
         icon:<GiIcons.GiGearHammer style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:'nav-text'
     },
@@ -28,14 +28,14 @@ export const SidebarData=[
         cName:'nav-text'
     },
     {
-        title:'업로드',
-        path:"/",
+        title:'비디오 업로드',
+        path:"/upload",
         icon:<FiIcons.FiUpload style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:"nav-text"
     },
     {
         title:'라이브 시작',
-        path:'/',
+        path:'/broadcastform',
         icon:<RiIcons.RiLiveFill style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:'nav-text'
     }

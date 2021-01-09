@@ -3,20 +3,6 @@ import { Input, Button } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> e9aa0f9b4444b902690c10a3a4f2d144c00aa779
->>>>>>> fbace1a1f601ccf83c71286fb7d1c75ad7f5ebd0
->>>>>>> cdda10cee7cef18d58d993af74f56c6581c94e32
->>>>>>> a8b1982ddac33b56b6d997678cec76b199ead77e
-
 
 function RegisterPage(props) {
     //디스패치 함수 가져오기

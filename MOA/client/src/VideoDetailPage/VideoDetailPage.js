@@ -11,7 +11,10 @@ function VideoDetailPage(props){
   const videoId = props.match.params.videoId
   const [Video, setVideo] = useState([])
   const [CommentLists, setCommentLists] = useState([])
+  const [View , setView] = useState([])
 
+  var views = Video.views;
+  console.log("조회수 : ",views)
 
   const videoVariable = {videoId: videoId}
     
@@ -20,6 +23,7 @@ function VideoDetailPage(props){
         .then(response => {
             if (response.data.success) {
                 setVideo(response.data.video)
+                setView(views)
             } else {
                 alert('Failed to get video Info')
             }

@@ -3,8 +3,6 @@ import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import Axios from 'axios';
 import '../Mainpage.css';
-import Carousel from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
 
 
 function MainLivePage(){
@@ -33,9 +31,6 @@ function MainLivePage(){
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 
                 {/* {liveRenderCards} */}
-                <Carousel arrows>
-
-                </Carousel>
                 </div>
             </span>
         </div>

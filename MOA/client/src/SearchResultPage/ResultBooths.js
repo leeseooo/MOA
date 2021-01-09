@@ -38,11 +38,7 @@ function ResultBooths(props) {
             })
 
         //비디오 가져오기
-<<<<<<< HEAD
-        axios.post('/api/video/search', body)
-=======
         axios.get('/api/video/getVideos', body)
->>>>>>> fbace1a1f601ccf83c71286fb7d1c75ad7f5ebd0
             .then(res => {
                 if (res.data.success) {
                     console.log("현재 비디오", res.data);
@@ -135,10 +131,7 @@ function ResultBooths(props) {
 
         console.log("렌더카드 전 비디오 state", Video)
 
-        var renderCards = Video.map((video, index) => {
-
-            let minutes = Math.floor(video.duration / 60);
-            let seconds = Math.floor(video.duration - minutes * 60);
+        const renderCards = Video.map((video, index) => {
             return (
                 <Col lg={6} md={8} xs={24} key={index}>
                     <div style={{ position: 'relative' }}>
@@ -151,7 +144,6 @@ function ResultBooths(props) {
                                 fontWeight: '500', lineHeight: '12px'
                             }}
                             >
-                                <span>{minutes} : {seconds}</span>
                             </div>
                         </a>
                     </div>
@@ -164,7 +156,7 @@ function ResultBooths(props) {
                     <span style={{ marginLeft: '3rem' }}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM Do YY")}</span>
                 </Col>
 
-            )
+            ) 
         })
 
         console.log("renderCards", renderCards)

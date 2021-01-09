@@ -124,7 +124,7 @@ function ImageUploadPage(props){
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <Form onSubmit>
-            <Input style={{border:'white', marginTop:'3rem'}}
+            <Input style={{border:'white', marginTop:'4rem'}}
                  size="large"
                  onChange={handleChangeTitle}
                  value={title}
