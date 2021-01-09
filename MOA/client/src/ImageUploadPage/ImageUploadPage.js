@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
-var imgNum = -1
-
 const Catogory = [
     { value: 0, label: "전시" },
     { value: 0, label: "공연" },
@@ -18,7 +16,7 @@ const Catogory = [
     { value: 0, label: "기타" },
 ]
 
-function ImageUploadPage(){
+function ImageUploadPage(props){
     const user = useSelector(state => state.user);
 
     const [title, setTitle] = useState("");
@@ -53,6 +51,10 @@ function ImageUploadPage(){
     const onDateChange = (date, dateString) => {
         setDateString(dateString);
     }
+    const handleETC = (event) => {
+        setIntroduction("이미지를 소개해주세요")
+    }
+
     const onSubmit = (event) => {
 
         event.preventDefault();
@@ -198,7 +200,7 @@ function ImageUploadPage(){
                     placeholder="본문을 작성해주세요"
                 />
                 <br /><br />
-                <HashTag onChange={handleHashTag} value={hashtag}/><br /><br/>
+                
                 <Button type="primary" size="large" onClick={onSubmit}>
                     제출
                 </Button>
@@ -206,3 +208,4 @@ function ImageUploadPage(){
         </div>
     )
 }
+export default ImageUploadPage;
