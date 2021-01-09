@@ -101,7 +101,7 @@ function RegisterPage(props) {
                 <Input type="password" value={Password} placeholder="비밀번호" onChange={onPasswordHandler} />
 
                 <label>비밀번호 확인</label>
-                <Input type="password" value={ConfirmPassword} placeholder="이름" onChange={onConfirmPasswordHandler} />
+                <Input type="password" value={ConfirmPassword} placeholder="비밀번호 확인" onChange={onConfirmPasswordHandler} />
 
                 <br />
 

@@ -9,7 +9,6 @@ import LoginPage from "./LoginPage/LoginPage";
 import SearchResultPage from "./SearchResultPage/SearchResultPage";
 import Auth from "./hoc/auth";
 import Axios from 'axios'
-import SearchResultPage from './SearchResultPage/SearchResultPage';
 
 function App() {
   return (
@@ -21,11 +20,7 @@ function App() {
           <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />
           <Route exact path="/image" component={Auth(ImageUploadPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
-<<<<<<< HEAD
           <Route exact path="/search" component={Auth(SearchResultPage, null)}/>
-=======
-          <Route exact path="/search" component={Auth(SearchResultPage, null)} />
->>>>>>> 491f1147228a693f4cee6d4aedadbf555b03f138
       </Switch>
     </div>
   );
