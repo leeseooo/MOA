@@ -25,13 +25,13 @@ const MainCategoryButton=()=>{
         <span style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
 
         <span className="category" >
-            <button className="categorybutton1" onClick={() => changeText(category[0])}  ><image src="./display.png"/>전시</button>
+            <button className="categorybutton1" onClick={() => changeText(category[0])}  ><img src="./display.png"/>전시</button>
             <div className="verticalLine"></div>
-            <button className="categorybutton2" onClick={() => changeText(category[1])} ><image src="./stage.png"/>공연</button>
+            <button className="categorybutton2" onClick={() => changeText(category[1])} ><img src="./stage.png"/>공연</button>
             <div className="verticalLine"></div>
-            <button className="categorybutton3" onClick={() => changeText(category[2])} ><image src="./haksul.png"/>학술</button>
+            <button className="categorybutton3" onClick={() => changeText(category[2])} ><img src="./haksul.png"/>학술</button>
             <div className="verticalLine"></div>
-            <button className="categorybutton4" onClick={() => changeText(category[3])} ><image src="./event.png"/>이벤트</button>
+            <button className="categorybutton4" onClick={() => changeText(category[3])} ><img src="./event.png"/>이벤트</button>
             {/* onMouseEnter={() => setIsShown2(!hovered2)} onMouseLeave={() => setIsShown2(false)} */}
         </span>
         

@@ -7,7 +7,7 @@ import { SidebarData } from './SidebarData';
 import axios from 'axios';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
-import moalogo from '../pictures/moa.png';
+import moalogo from '../mainpage/pictures/moa.png'
 import {withRouter} from 'react-router-dom';
 
 

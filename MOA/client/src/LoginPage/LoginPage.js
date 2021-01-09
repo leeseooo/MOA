@@ -39,6 +39,7 @@ function LoginPage(props) {
             .then(response => {
                 if (response.payload.loginSuccess) {
                     //submit시 홈페이지로 이동
+                    window.localStorage.setItem('userId', response.payload.userId);
                     props.history.push('/')
                 }
                 else {
