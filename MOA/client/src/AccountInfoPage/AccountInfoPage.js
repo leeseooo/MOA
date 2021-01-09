@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import NavBar from '../NavBar/Navbar';
+import MyBoothCards from './MyBoothCards';
 
-import Profile from './profile';
+import Profile from './Profile';
 
 function AccountInfoPage() {
     //로컬데이터 저장된 state
@@ -23,6 +25,7 @@ function AccountInfoPage() {
 
     return (
         <div>
+            <NavBar/>
             <article
                 style={{
                     margin: '24px 16px',
@@ -33,7 +36,7 @@ function AccountInfoPage() {
                 <div style={{ margin: "10px 0 120px 0" }}>
                     <Profile></Profile>
                 </div>
-                <BoothCards></BoothCards>
+                <MyBoothCards></MyBoothCards>
             </article>
         </div>
     );

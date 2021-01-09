@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { Row, Col, Input, Button, message } from 'antd';
+import { Container } from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
+
+const { TextArea } = Input;
 
 function Profile() {
     //state
+    const [currentUser, setCurrentUser] = useState([]);
     const [editing, setEditing] = useState(false)       //프로필 변경 상태인지 알리는 변수
     const [imageFile, setImageFile] = useState("")      //이미지 파일
     const [src, setSrc] = useState("")   //이미지 소스
     const [nickName, setNickName] = useState("")    //닉네임
     const [content, setContent] = useState("")    //자기소개
+
+
 
     //미리보기
     let profile_preview = ""
@@ -15,22 +25,33 @@ function Profile() {
         getMyProfile()
     }, [])
 
-    //서버에서 계정주 프로필 가져오기
+    //데이터 받아오기
     const getMyProfile = () => {
+       
         const body = {
-            email: currentuser.email
+            id : localStorage.getItem('userId')
         }
 
         axios.post('/api/user/getProfile', body)
             .then(res => {
-                console.log("res", res)
-                setSrc(res.data.profile.image)
-                setNickName(res.data.profile.nickName)
-                setContent(res.data.profile.content)
+                console.log("findSuccess", res.data.findSuccess)
+                if (res.data.findSuccess) {
+                    console.log("프로필 res", res.data.User)
+                    setSrc(res.data.User.image)
+                    setNickName(res.data.nickName)
+                    setContent(res.data.User.content)  
+                    console.log("현재 프로필", nickName, content)
+                } 
+                else {
+                    alert('프로필 정보를 갖고 오는 데 실패했습니다.')
+                }
+               
             })
             .catch(err => {
                 console.log(err.message)
             })
+            
+            console.log("프로필 정보 받기", nickName, content)
     }
 
     //변경사항 저장
@@ -40,15 +61,19 @@ function Profile() {
             console.log("content",)
 
             const body = {
-                id: currentuser.id,
+                id: localStorage.getItem('userId')._id,
                 nickName: nickName,
-                profileImg: src,
+                image: src,
                 content: content
             }
-            axios.post('/api/profile/updateProfile', body)
+            axios.post('/api/user/saveProfile', body)
                 .then(res => {
-                    console.log("save res", res)
-                    setEditing(false)
+                    if (res.data.success) {
+                        console.log("save res")
+                        setEditing(false)
+                    } else {
+                        alert('프로필 수정을 실패했습니다.')
+                    }
                 })
                 .catch(err => {
                     console.log(err.message)
@@ -58,11 +83,34 @@ function Profile() {
         else { setEditing(true) }
     }
 
+
     //프로필 사진 변경
-    const isSelectedImg = (event) => {}
+    const onDrop = (file) => {
+
+        let formData = new FormData();
+        const config = {
+            header: { 'content-type': 'multipart/form-data' }
+        }
+        formData.append("file", file)
+
+        axios.post('/api/image/uploadFiles', formData, config)
+            .then(response => {
+                if (response.data.success) {
+                    message.success(`이미지 업로드 성공 !`);
+                    setImageFile(response.data.filePath)
+                } else {
+                    message.error(`이미지 업로드 실패 ~`);
+                }
+            })
+
+    }
 
     //프로필 사진이 변경될때
-    if (imageFile !== null) {}
+    if (imageFile !== null) {
+        profile_preview = <img
+            class="changeProfile"
+            src={src} />
+    }
 
     //프로필 변경 화면
     if (editing === true) {
@@ -74,14 +122,29 @@ function Profile() {
                             {profile_preview}
                         </Row>
                         <Row>
-                            <Input
+                            {/* <Input
                                 type="file"
                                 accept="image/jpeg, image/jpg, image/png"
                                 onChange={isSelectedImg}
-                            />
+                            /> */}
+                            <Dropzone
+                                onDrop={onDrop}
+                                multiple={true}
+                                maxSize={800000000}>
+                                {({ getRootProps, getInputProps }) => (
+
+                                    <div style={{ marginLeft: '20px', width: '50px', height: '10px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                                        {...getRootProps()}
+                                    >
+                                        <input {...getInputProps()} />
+                                        <Button size='small' type='primary'>이미지 추가</Button>
+
+                                    </div>
+                                )}
+                            </Dropzone>
                         </Row>
                     </Col>
-                    
+
                     <Col style={{ width: "500px", }}>
                         <Row>
                             <Input
@@ -121,7 +184,7 @@ function Profile() {
     return (
         <Container sytle={{ width: "100%" }}>
             <Row justify="center" align="middle">
-                <Col style={{ margin: "0 50px" }}>
+            <Col style={{ margin: "0 50px" }}>
                     <img
                         src={src}
                         class="Profile"

@@ -36,6 +36,7 @@ app.use('/api/liveVideo', require('./routes/liveVideo'));
 
 app.use('/uploads', express.static('uploads'));
 
+
 let broadcaster;
 io.on('connection', socket => {
 

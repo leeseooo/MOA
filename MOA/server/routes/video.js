@@ -177,4 +177,13 @@ router.post('/search', (req, res) => {
         })
 })
 
+router.post('/getMyVideos', (req, res) => {
+    Video.find({ 
+        writer : req.body.owner })
+        .exec((err, video) => {
+            if (err) return res.status(400).json({ success: false, err});
+            res.status(200).json({ success: true, video })
+        })
+})
+
 module.exports = router;

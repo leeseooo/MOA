@@ -23,6 +23,19 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single("file")
 
+const getCurrentDate = () => {
+    let date = new Date();
+  
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let today = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let milliseconds = date.getMilliseconds();
+  
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+  }
 
 //=================================
 //             User
@@ -96,13 +109,12 @@ router.post("/search", (req, res) => {
 })
 
 //사용자의 이미지 카드 가져오기
-router.post('/getBooth/myBooths', (req, res) => {
-    let now = getCurrentDate();
+router.post('/myBooths', (req, res) => {
 
-    Booth.find({ owner: req.body.owner })
-    .populate('image')
+    Image.find({ writer : req.body.id })
     .exec((err, booth) => {
-        if (!booth) {
+        console.log(booth.length)
+        if (booth.length === 0) {
             return res.json({
                 find: false,
                 message: "찾을 수 없습니다."
@@ -111,6 +123,27 @@ router.post('/getBooth/myBooths', (req, res) => {
 
         //console.log("in getBooth", booth)
         return res.status(200).json({ find: true, booth })
+    })
+})
+
+//전체 이미지 카드 가져오기
+router.get("/nowImage", (req, res) => {
+    const now = getCurrentDate()
+
+    Image.find({
+        startDate: { '$lte': now },
+        endDate: {"$gte" : now}
+    }).populate('writer')
+    .exec((err, image) => {
+        if (err) {
+            return res.json({
+                find: false,
+                message: "찾을 수 없습니다."
+            })
+        }
+
+        console.log("검색된 이미지카드", image)
+        return res.status(200).json({ find: true, image })
     })
 })
 
