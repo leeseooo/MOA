@@ -68,13 +68,12 @@ function Subscriber(props) {
 
     return (
         <div>
-            <button onClick
-                    style={{
-                        backgroundColor: `${Subscribed ? '#AAAAAA' : '#CC0000'}`,
-                        borderRadius: '4px', color: 'white',
-                        padding: '10px 16px', fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase'
-                    }}>
-                        {SubscribeNumber} {Subscribed ? 'Subscribed' : 'Subscribe'}
+            <button onClick={onSubscribe}
+                    style={{ backgroundColor:`${Subscribed ? '#AAAAAA' : '#48bcec'}`, borderRadius: '4px',
+                    color: 'white', padding: '5px 16px', borderStyle: 'none',
+                    fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase', cursor: 'pointer' }}
+                    >
+                        {Subscribed ? '구독중' : '구독'}
                     </button>
         </div>
     )
