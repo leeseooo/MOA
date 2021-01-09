@@ -61,8 +61,11 @@ function Comments(props) {
                 />
                 <br />
             </form>
-            <div style={{display:'flex', }} onSubmit={onSubmit}>
-            <Button type="primary" style={{ width: '55px', height: '30px' }} 
+            <div style={{display:'flex', paddingBottom:'2rem'}} 
+                onSubmit={onSubmit}>
+            <Button type="primary" 
+                    style={{ width: '55px', height: '30px', marginTop:'1rem',
+                padding:'0'}} 
                 onClick={onSubmit}>댓글</Button>
             </div>
         </div>

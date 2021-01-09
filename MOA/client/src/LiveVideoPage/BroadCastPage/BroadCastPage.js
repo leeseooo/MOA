@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, List, Avatar, Skeleton, Tag, Button } from 'antd';
+import ChatPage from '../LiveChatPage/ChatPage';
+import Subscriber from '../../VideoDetailPage/Sections/Subscriber';
+import LiveLike from '../Sections/LiveLike';
 import './BroadCastPage.css';
 import Axios from 'axios';
 import io from 'socket.io-client';
@@ -28,6 +31,7 @@ function BroadCastPage(props) {
         Axios.post('/api/liveVideo/getLiveDetailByBroadcaster', { broadcasterId })
             .then(res => {
                 if (res.data.success) {
+                    console.log(res.data.liveDetail)
                     setLiveDetail(res.data.liveDetail)
                 } else {
                     alert("라이브 정보를 가져오길 실패했습니다.")
@@ -126,7 +130,7 @@ function BroadCastPage(props) {
     }
 
     if (liveDetail.writer) {
-        //const suberscribeButton = (<Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />)
+        // const suberscribeButton = (<Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />)
         const tagChild = liveDetail.tags.map(forMap);
         return (
             <Row gutter={[16, 16]} style={{ margin: '0', padding: '0' }}>
@@ -137,17 +141,17 @@ function BroadCastPage(props) {
                             <div style={{ paddingLeft: '0.2rem', marginTop: '0.5rem', marginBottom: '0.5rem', fontSize: '1.3rem' }}>{liveDetail.title}</div>
                             <div style={{ display: 'flex', paddingRight: '0.2rem', paddingLeft: '0.2rem' }}>
                                 <div style={{ flex: '1', color: '#a0a19a' }}>시청자수 0회</div>
-                                {/* <LiveLike userId={localStorage.getItem('userId')} liveId={liveDetail._id} /> */}
+                                <LiveLike userId={localStorage.getItem('userId')} liveId={liveDetail._id} />
                             </div>
                         </div>
                         <hr style={{ borderBottom: 'none', borderTop: '2px solid lightgray' }} />
                         
                         <List.Item
                             actions={[
-                                // <Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />,
+                                <Subscriber userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />,
                                 <Button 
                                     style={{ backgroundColor: '#48bcec', borderRadius: '4px',
-                                        color: 'white', padding: '5px 16px', borderStyle: 'none',
+                                        color: 'white', padding: '5px 16px', borderStyle: 'none', paddingBottom: '7px',
                                         fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase', cursor: 'pointer' }}
                                         onClick={handleLiveClose}>
                                         라이브 종료
@@ -167,7 +171,7 @@ function BroadCastPage(props) {
                     </div>
                 </Col>
                 <Col lg={6} xs={24} className='chatBlock'>
-                    {/* <ChatPage /> */}
+                    <ChatPage />
                 </Col>
             </Row>
         )
@@ -181,7 +185,7 @@ function BroadCastPage(props) {
                     </div>
                 </Col>
                 <Col lg={6} xs={24} className='chatBlock'>
-                    {/* <ChatPage /> */}
+                    <ChatPage />
                 </Col>
             </Row>
         )

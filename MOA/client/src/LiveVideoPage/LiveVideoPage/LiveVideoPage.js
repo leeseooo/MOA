@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, List, Avatar, Tag } from 'antd';
-// import ChatPage from '../LiveChatPage/ChatPage';
-// import Subscribe from '../../VideoDetailPage/Section/Subscribe';
-// import LiveLike from '../Sections/LiveLike';
+import ChatPage from '../LiveChatPage/ChatPage';
+import Subscriber from '../../VideoDetailPage/Sections/Subscriber';
+import LiveLike from '../Sections/LiveLike';
 import '../BroadCastPage/BroadCastPage.css'
 import Axios from 'axios'
 import io from 'socket.io-client';
@@ -102,7 +102,7 @@ function LiveVideoPage(props) {
     if (liveDetail.writer) {
         //const suberscribeButton = (liveDetail.writer._id !== localStorage.getItem('userId')) && (<Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />)
         const tagChild = liveDetail.tags.map(forMap);
-        // const suberscribeButton = (<Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />)
+        const suberscribeButton = (<Subscriber userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />)
         return (
             <Row gutter={[16, 16]} style={{ margin: '0', padding: '0' }}>
                 <Col lg={16} xs={24}>
@@ -112,12 +112,12 @@ function LiveVideoPage(props) {
                         <div style={{ paddingLeft: '0.2rem', marginTop: '0.5rem', marginBottom: '0.5rem', fontSize: '1.3rem' }}>{liveDetail.title}</div>
                         <div style={{ display: 'flex', paddingRight: '0.2rem', paddingLeft: '0.2rem' }}>
                             <div style={{ flex: '1', color: '#a0a19a' }}>시청자수 0회</div>
-                            {/* <LiveLike userId={localStorage.getItem('userId')} liveId={liveId} /> */}
+                            <LiveLike userId={localStorage.getItem('userId')} liveId={liveId} />
                         </div>
                     </div>
                     <hr style={{ borderBottom: 'none', borderTop: '2px solid lightgray' }} />
                     <List.Item
-                            // actions={[<Subscribe userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />]}
+                            actions={[<Subscriber userTo={liveDetail.writer._id} userFrom={localStorage.getItem('userId')} />]}
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={liveDetail.writer.image} />}
@@ -131,7 +131,7 @@ function LiveVideoPage(props) {
                 </div>
                 </Col>
                 <Col lg={6} xs={24} className='chatBlock'>
-                        {/* <ChatPage /> */}
+                        <ChatPage />
                 </Col>
             </Row>
         )

@@ -16,8 +16,10 @@ const io = require('socket.io')(server, {
 
 const config = require("./config/key");
 
+const { Chat } = require('./models/Chat');
+
 const mongoose = require('mongoose');
-mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+const connect = mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err))
 
@@ -30,9 +32,11 @@ app.use('/api/user', require('./routes/user'));
 app.use('/api/video', require('./routes/video'));
 app.use('/api/image', require('./routes/image'));
 app.use('/api/liveVideo', require('./routes/liveVideo'));
-// app.use('/api/like', require('./routes/like'));
-// app.use('/api/subscribe', require('./routes/subscribe'));
-// app.use('/api/comment', require('./routes/comment'));
+app.use('/api/like', require('./routes/like'));
+app.use('/api/subscribe', require('./routes/subscribe'));
+app.use('/api/comment', require('./routes/comment'));
+app.use('/api/chat', require('./routes/chat'));
+
 
 app.use('/uploads', express.static('uploads'));
 
@@ -69,7 +73,24 @@ io.on('connection', socket => {
   })
 
   /* live chat */
-  
+  socket.on("Input Chat Message", msg => {
+    connect.then(db => {
+      try {
+        let chat = new Chat({ message: msg.chatMessage, sender: msg.userId, type: msg.type })
+        
+        chat.save((err, doc) => {
+          if (err) return res.json({ success: false, err })
+          Chat.find({ "_id": doc._id })
+            .populate('sender')
+            .exec((err, doc) => {
+              return io.emit('Output Chat Message', doc);
+            })
+        })
+      } catch(e) {
+        console.error(e);
+      }
+    })
+  })
 })
 
 

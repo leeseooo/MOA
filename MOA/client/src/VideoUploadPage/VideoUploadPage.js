@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form, message, Input, DatePicker } from 'antd'
 import { Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone';
+import HashTag from '../HashTag';
 import axios from 'axios';
 import { useSelector } from "react-redux";
 
@@ -29,6 +30,11 @@ function VideoUploadPage(props){
     const [StartDate, setStartDate] = useState("")
     const [EndDate, setEndDate] = useState("")
     const [dateString, setDateString] = useState("")
+    let hashTags = [];
+
+    const handleAddTags = (tags) => {
+        hashTags = tags;
+    }
 
     const handleChangeTitle = (event) => {
         setTitle(event.currentTarget.value)
@@ -68,7 +74,8 @@ function VideoUploadPage(props){
             duration: Duration,
             thumbnail: Thumbnail,
             startDate: StartDate,
-            endDate: EndDate
+            endDate: EndDate,
+            tags:hashTags
         }
 
         axios.post('/api/video/uploadVideo', variables)
@@ -125,9 +132,9 @@ function VideoUploadPage(props){
 
     }
     return(
-        <div style={{ maxWidth: '700px', margin: '2rem auto'}}>-
+        <div style={{ maxWidth: '700px', margin: '2rem auto'}}>
             <Form onSubmit={onSubmit}>
-              <Input style={{border:'white', marginTop:'5rem'}}
+              <Input style={{border:'white', marginTop:'4rem'}}
                  size="large"
                  onChange={handleChangeTitle}
                  value={title}
@@ -146,7 +153,8 @@ function VideoUploadPage(props){
               </Link>
               <Link to="/upload">
                 <Button
-                  type="primary" size="small">
+                  style={{background: '#48bcec', 
+                  color: 'white', }} size="small">
                   동영상
                 </Button>
               </Link>
@@ -164,11 +172,20 @@ function VideoUploadPage(props){
                         maxSize={800000000}>
                         {({ getRootProps, getInputProps }) => (
                             
-                            <div style={{ marginLeft:'20px', width: '50px', height: '10px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            <div style={{ 
+                                background: '#48bcec', 
+                                color: 'white', 
+                                paddingRight: '1rem', 
+                                paddingLeft: '1rem', 
+                                paddingTop: '0.2rem',
+                                paddingBottom: '0.2rem',
+                                border: '2px solid #48bcec',
+                                cursor: 'pointer'
+                            }} 
                                 {...getRootProps()}
                             >
                                 <input {...getInputProps()} />
-                                <Button size='small' type='primary'>동영상 추가</Button>
+                                <p style={{ marginBottom: '0'}}>동영상 추가</p>
                             </div>
                         )}
                     </Dropzone>
@@ -190,8 +207,11 @@ function VideoUploadPage(props){
                     placeholder="영상에 대해 소개해주세요"
                 />
                 <br /><br />
-                {/*  해시태그 */ }
-                <Button type="primary" size="large" onClick={onSubmit}>
+                <HashTag addTags={handleAddTags}/><br/><br/>
+                <Button style={{background: '#48bcec', 
+                                color: 'white', }} 
+                                size="large" 
+                                onClick={onSubmit}>
                     제출
                 </Button>
             </Form>

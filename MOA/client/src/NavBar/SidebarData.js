@@ -16,27 +16,21 @@ export const SidebarData=[
         cName:'nav-text'
     },
     {
-        title:'부스생성',
-        path:'/video/upload',
-        icon:<GiIcons.GiGearHammer style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
+        title:'업로드',
+        path:"/upload",
+        icon:<FiIcons.FiUpload style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
+        cName:"nav-text"
+    },
+    {
+        title:'라이브 시작',
+        path:'/broadcastform',
+        icon:<RiIcons.RiLiveFill style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:'nav-text'
     },
     {
         title:'부스편집',
         path:'/',
         icon:<BiIcons.BiEdit style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
-        cName:'nav-text'
-    },
-    {
-        title:'업로드',
-        path:"/",
-        icon:<FiIcons.FiUpload style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
-        cName:"nav-text"
-    },
-    {
-        title:'라이브 시작',
-        path:'/',
-        icon:<RiIcons.RiLiveFill style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:'nav-text'
     }
 ]

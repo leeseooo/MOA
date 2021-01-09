@@ -30,16 +30,16 @@ function Navbar(props){
     }
 
     return (
-        <div style={{ position: 'fixed', zIndex: 5, width: '100%', display: 'flex', background: 'white' }}>
+        <div style={{ position: 'fixed', zIndex: 5, width: '100%', display: 'flex', background: 'white'}}>
             <IconContext.Provider value ={{ color: '#fff' }}>
             <div className='navbar'>
-                <Link to='#' className='menu-bars'>
+                <Link to='#' className='menu-bars' style={{ paddingTop: '0', }}>
                     <FaIcons.FaBars onClick={showSidebar} color="#FFA625"/>
                 </Link>
                 <a href='/'><img className="logo" src={moalogo} alt="logo" /></a>
                 {
                     (user.userData && !user.userData.isAuth) ?
-                    <Link to='/login' style={{ marginLeft: '570%', marginBottom: '20%'}}><button  className="loginbutton" >login</button></Link> :
+                    <Link to='/login'><button  className="loginbutton" >login</button></Link> :
                     <button style={{marginLeft:'90%'}} className="loginbutton" onClick={handleLogout}>logout</button>
                 }
             </div>
