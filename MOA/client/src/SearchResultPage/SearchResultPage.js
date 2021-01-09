@@ -30,7 +30,6 @@ function SearchResultPage() {
                     style={{ width: "100px" }}
                     onChange={onChangeHandler}
                 >
-                    <Option value="recommend">추천순</Option>
                     <Option value="date">날짜순</Option>
                     <Option value="name">이름순</Option>
                 </Select>

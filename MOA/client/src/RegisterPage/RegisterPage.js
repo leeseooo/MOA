@@ -45,7 +45,6 @@ function RegisterPage(props) {
             email: email,
             password: Password,
             name: Name,
-            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
         }
 
         //서버로 전달할 임시 프로필 객체
@@ -56,7 +55,7 @@ function RegisterPage(props) {
             content: "",
         }
 
-        // 임시 프로필 저장
+        //임시 프로필 저장
         axios.post('/api/profile/saveProfile', profile)
             .then(res => {
                 console.log(res)

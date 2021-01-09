@@ -6,7 +6,6 @@ function Profile() {
     const [imageFile, setImageFile] = useState("")      //이미지 파일
     const [src, setSrc] = useState("")   //이미지 소스
     const [nickName, setNickName] = useState("")    //닉네임
-    const [id, setId] = useState("")          //아이디
     const [content, setContent] = useState("")    //자기소개
 
     //미리보기
@@ -17,14 +16,46 @@ function Profile() {
     }, [])
 
     //서버에서 계정주 프로필 가져오기
-    const getMyProfile = () => {}
+    const getMyProfile = () => {
+        const body = {
+            email: currentuser.email
+        }
+
+        axios.post('/api/user/getProfile', body)
+            .then(res => {
+                console.log("res", res)
+                setSrc(res.data.profile.image)
+                setNickName(res.data.profile.nickName)
+                setContent(res.data.profile.content)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+    }
 
     //변경사항 저장
-    const changeEditing = () => {}
+    const changeEditing = () => {
+        if (editing) {
 
-    //취소버튼
-    const notChange = () => {
-        setEditing(false)
+            console.log("content",)
+
+            const body = {
+                id: currentuser.id,
+                nickName: nickName,
+                profileImg: src,
+                content: content
+            }
+            axios.post('/api/profile/updateProfile', body)
+                .then(res => {
+                    console.log("save res", res)
+                    setEditing(false)
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+
+        }
+        else { setEditing(true) }
     }
 
     //프로필 사진 변경
@@ -60,11 +91,8 @@ function Profile() {
                                 placeholder="이름"
                                 onChange={function (e) {
                                     setNickName(e.target.value)
-                                }.bind(this)}
+                                }}
                             />
-                        </Row>
-                        <Row>
-                            <p>@{id}</p>
                         </Row>
                         <Row style={{ margin: "0 0 30px 0" }}>
                             <TextArea
@@ -75,15 +103,12 @@ function Profile() {
                                 placeholder="소개문구"
                                 onChange={function (e) {
                                     setContent(e.target.value)
-                                }.bind(this)}
+                                }}
                             />
                         </Row>
                         <Row>
                             <Col style={{ margin: "0 10px 0 0" }}>
                                 <Button type="primary" onClick={changeEditing}>적용</Button>
-                            </Col>
-                            <Col>
-                                <Button type="default" onClick={notChange}>취소</Button>
                             </Col>
                         </Row>
                     </Col>
@@ -110,9 +135,6 @@ function Profile() {
                         <Col>
                             <Button type="primary" onClick={changeEditing}>프로필 수정</Button>
                         </Col>
-                    </Row>
-                    <Row style={{ padding: "0 0 20px 0" }}>
-                        <p>{id}</p>
                     </Row>
                     <Row>
                         <pre style={{ width: "500px", whiteSpace: "pre-wrap" }}>{content}</pre>
