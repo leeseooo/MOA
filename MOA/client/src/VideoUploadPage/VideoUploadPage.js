@@ -191,7 +191,7 @@ function VideoUploadPage(props){
                     placeholder="영상에 대해 소개해주세요"
                 />
                 <br /><br />
-                <HashTag /><br /><br/>
+                {/*  해시태그 */ }
                 <Button type="primary" size="large" onClick={onSubmit}>
                     제출
                 </Button>

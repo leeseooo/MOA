@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
+const imgNum=-1;
+
 const Catogory = [
     { value: 0, label: "전시" },
     { value: 0, label: "공연" },
