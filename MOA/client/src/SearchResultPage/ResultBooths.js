@@ -39,7 +39,7 @@ function ResultBooths(props) {
             })
 
         //비디오 가져오기
-        axios.post('/api/video/getVidoes', body)
+        axios.get('/api/video/getVideos', body)
             .then(res => {
                 if (res.data.success) {
                     console.log("현재 비디오", res.data);
