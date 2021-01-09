@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Form, Input, DatePicker,message,Pagination } from 'antd';
+import { Button, Form, Input, DatePicker,message } from 'antd';
 import { Link } from 'react-router-dom'
+import HashTag from '../HashTag';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { useSelector } from "react-redux";
@@ -8,7 +9,7 @@ import { useSelector } from "react-redux";
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
-const imgNum=-1;
+var imgNum = -1;
 
 const Catogory = [
     { value: 0, label: "전시" },
@@ -112,9 +113,8 @@ function ImageUploadPage(props){
                     const file = FilePath;
                     file.push(response.data.filePath)
                     setFilePath(file)
-                    // setFilePath(response.data.filePath)
                 } else {
-                    message.error(`이미지 업로드 실패 !!`);
+                    message.error(`이미지 업로드 실패 ~`);
                 }
             })
 
@@ -190,8 +190,6 @@ function ImageUploadPage(props){
                     placeholder="이미지를 소개해주세요(900자 제한)"
                 />
                 <br /><br />
-                <button onClick> ◀ </button>
-                <button onClick> ▶ </button>
                 <hr />
                 <br />
                 <label>본문</label><br/>
@@ -202,7 +200,7 @@ function ImageUploadPage(props){
                     placeholder="본문을 작성해주세요"
                 />
                 <br /><br />
-                
+                <HashTag onChange={handleHashTag} value={hashtag}/><br/><br/>
                 <Button type="primary" size="large" onClick={onSubmit}>
                     제출
                 </Button>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
+import moment from "moment";
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
 import moment from 'moment';
@@ -45,7 +47,6 @@ function RegisterPage(props) {
             email: email,
             password: Password,
             name: Name,
-            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
         }
 
         //서버로 전달할 임시 프로필 객체
@@ -56,8 +57,8 @@ function RegisterPage(props) {
             content: "",
         }
 
-        // 임시 프로필 저장
-        axios.post('/api/user/saveProfile', profile)
+        //임시 프로필 저장
+        axios.post('/api/profile/saveProfile', profile)
             .then(res => {
                 console.log(res)
             })
@@ -102,7 +103,7 @@ function RegisterPage(props) {
                 <Input type="password" value={Password} placeholder="비밀번호" onChange={onPasswordHandler} />
 
                 <label>비밀번호 확인</label>
-                <Input type="password" value={ConfirmPassword} placeholder="이름" onChange={onConfirmPasswordHandler} />
+                <Input type="password" value={ConfirmPassword} placeholder="비밀번호 확인" onChange={onConfirmPasswordHandler} />
 
                 <br />
 

@@ -11,6 +11,10 @@ function VideoDetailPage(props){
 
     const videoVariable = {videoId : videoId}
 
+    const updateComment = (newComment) => {
+        setCommentLists(CommentLists.concat(newComment))
+    }
+
     useEffect(() => {
         axios.post('/api/video/getVideoDetail', videoVariable)
             .then(response => {
