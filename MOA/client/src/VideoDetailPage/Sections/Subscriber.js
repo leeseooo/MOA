@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
-function Subscriber() {
+function Subscriber(props) {
     const userTo = props.userTo
     const userFrom = props.userFrom
     const [ SubscribeNumber, setSubscribeNumber] = useState(0)
