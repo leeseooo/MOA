@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+.mainfirst{
+    background-image: url('../pictures/home_mainback.png');
+    height: 700px;
+    background-size: 100% 700px;
+    border-bottom: none;
+}
+.searchinput{
+    position: relative;
+    margin-top:150px;
+    width:51%;
+    height:47px;
+    font-family: NotoSansCJKkr-Light;
+    font-size:22px;
+    font-weight:lighter;
+    right:-47%;
+    text-align:right;
+    padding-right: 3rem;
+    outline: none;
+    text-align:right;
+    border-radius:0px;
+    border: 3px solid #F3868D;
+}
+
+
+.searchicon {
+    position: absolute;
+    margin-top:160px;
+    right:3%;
+    width:30px;
+    height:30px;
+    color:#F3868D;
+    cursor: pointer;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url('http://fonts.cdnfonts.com/css/typographica');
+.kopubbatang * {
+    font-family: 'KoPub Batang', serif;
+}
