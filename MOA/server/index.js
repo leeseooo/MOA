@@ -20,6 +20,10 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/video', require('./routes/video'));
 app.use('/api/image', require('./routes/image'));
 
+app.get('/api/hello', (req, res) => {
+  return 'hello'
+})
+
 app.use('/uploads', express.static('uploads'));
 
 if (process.env.NODE_ENV === "production") {
