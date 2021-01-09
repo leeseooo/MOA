@@ -79,7 +79,9 @@
   @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
   .loginbutton{
     position: absolute;
-    left:1200px;
+    left: 1100px;
+    top: 16px;
+    z-index: 10;
     width: 100px;
     height: 32px;
     border-radius: 8px;
