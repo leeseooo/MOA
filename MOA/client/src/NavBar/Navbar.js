@@ -22,35 +22,32 @@ function Navbar(props){
         axios.get('/api/user/logout')
             .then(res => {
                 if (res.status === 200) {
-                    props.history.push('/login')                        
+                    props.history.push('/login');
                 } else {
-                    alert('로그아웃에 실패했습니다.');
+                    alert('로그아웃에 실패했습니다.')
                 }
             })
     }
 
-    return(
+    return (
         <div style={{ position: 'fixed', zIndex: 5, width: '100%', display: 'flex', background: 'white' }}>
-        <IconContext.Provider value={{ color: '#fff' }}>
-        <div className='navbar'>
-            <Link to="#" className='menu-bars'>
-                <FaIcons.FaBars onClick={showSidebar} color="#FFA625"/>
-            </Link>
-            <a href='/'><img className="logo" src={moalogo} alt="logo" /></a>
-            {
-                (user.userData && !user.userData.isAuth) ?
-                <Link to='/login' style={{ marginLeft: '570%', marginBottom: '20%'}}><button  className="loginbutton" >login</button></Link> :
-                <button style={{marginLeft:'90%'}} className="loginbutton" onClick={handleLogout}>logout</button>
-            }
-        
-            {/* <Link to='/login'><button className="loginbutton">login</button></Link>  */}
-            
-        </div>
-        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+            <IconContext.Provider value ={{ color: '#fff' }}>
+            <div className='navbar'>
+                <Link to='#' className='menu-bars'>
+                    <FaIcons.FaBars onClick={showSidebar} color="#FFA625"/>
+                </Link>
+                <a href='/'><img className="logo" src={moalogo} alt="logo" /></a>
+                {
+                    (user.userData && !user.userData.isAuth) ?
+                    <Link to='/login' style={{ marginLeft: '570%', marginBottom: '20%'}}><button  className="loginbutton" >login</button></Link> :
+                    <button style={{marginLeft:'90%'}} className="loginbutton" onClick={handleLogout}>logout</button>
+                }
+            </div>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className='nav-menu-items' onClick={showSidebar}>
                 <li className="navbar-toggle">
                     <Link to="#" className='menu-bars'>
-                    <AiIcons.AiOutlineClose style={{color:"#F3868D"}}/>
+                        <AiIcons.AiOutlineClose/>
                     </Link>
                 </li>
                 {SidebarData.map((item,index) =>{
@@ -67,7 +64,7 @@ function Navbar(props){
         </nav>
         </IconContext.Provider>
         </div>
-    );
+    )
 }
 
-export default withRouter(Navbar);
+export default withRouter(Navbar) 

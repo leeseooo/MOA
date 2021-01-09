@@ -68,7 +68,7 @@ function VideoDetailPage(props){
                     <Tag style={{ marginLeft:'3rem'}}>
                         {Image.tag !== '' && (<div>{Image.tags}해시태그자리</div>)}
                     </Tag><hr/>
-                    <Comment CommentList={CommentLists} postId={Video._id} refreshFunction={updateComment}/>
+                    {/* <Comment CommentList={CommentLists} postId={Video._id} refreshFunction={updateComment}/> */}
                 </div>
             </Col>
             <Col lg={6} xs={24}>

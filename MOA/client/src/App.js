@@ -1,12 +1,13 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
-import MainPage from './mainpage/Mainpage'
+import Navbar from './NavBar/Navbar'
+import MainLandingPage from './MainLandingPage/MainLandingPage'
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
 import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
 import ImageUploadPage from './ImageUploadPage/ImageUploadPage'
-import LandingPage from "./LandingPage/LandingPage.js";
 import RegisterPage from "./RegisterPage/RegisterPage.js";
 import LoginPage from "./LoginPage/LoginPage";
+import SearchResultPage from "./SearchResultPage/SearchResultPage";
 import Auth from "./hoc/auth";
 import Navbar from "./NavBar/Navbar";
 import Axios from 'axios'

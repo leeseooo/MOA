@@ -6,8 +6,6 @@ import * as BiIcons from "react-icons/bi";
 import * as GiIcons from "react-icons/gi";
 import * as RiIcons from "react-icons/ri";
 import * as FiIcons from "react-icons/fi";
-import Mainpage from "../mainpage/Mainpage";
-
 
 
 export const SidebarData=[

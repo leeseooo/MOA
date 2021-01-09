@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { Input, Button, Select } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import ReasultCards from './ResultBooths';
+// import NavigationBar from '../navbar/NavigationBar';
+
+const {Option} = Select
 
 function SearchResultPage() {
     const [alignType, setAlignType] = useState("recommend");
@@ -9,7 +15,7 @@ function SearchResultPage() {
 
     return (
         <div>
-            <NavigationBar></NavigationBar>
+            {/* <NavigationBar></NavigationBar> */}
             <div style={{ textAlign: "right" }}>
                 <Input placeholder="입력된 검색어"
                     //size="large"
@@ -24,7 +30,6 @@ function SearchResultPage() {
                     style={{ width: "100px" }}
                     onChange={onChangeHandler}
                 >
-                    <Option value="recommend">추천순</Option>
                     <Option value="date">날짜순</Option>
                     <Option value="name">이름순</Option>
                 </Select>
