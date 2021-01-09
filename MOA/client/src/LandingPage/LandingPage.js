@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
-import { Card, Avatar, Col, Typography, Row } from 'antd';
+import { Card, Avatar, Col, Typography, Row} from 'antd';
+
+const { Title } = Typography;
 
 function LandingPage(){
     return(
