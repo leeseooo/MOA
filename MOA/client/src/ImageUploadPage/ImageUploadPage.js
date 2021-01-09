@@ -28,8 +28,13 @@ function ImageUploadPage(props){
     const [Categories, setCategories] = useState("전시")
     const [FilePath, setFilePath] = useState([])
     const [FileName, setFileName] = useState([])
-    const [hashtag, setHashTag] = useState("")
     const [dateString, setDateString] = useState("")
+
+    let hashTags = [];
+
+    const handleAddTags = (tags) => {
+        hashTags = tags;
+    }
 
     const handleChangeTitle = (event) => {
         setTitle(event.currentTarget.value)
@@ -45,10 +50,6 @@ function ImageUploadPage(props){
 
     const handleChangeTwo = (event) => {
         setCategories(event.currentTarget.value)
-    }
-
-    const handleHashTag = (event) => {
-        setHashTag(event.currentTarget.value)
     }
 
     const onDateChange = (date, dateString) => {
@@ -79,8 +80,8 @@ function ImageUploadPage(props){
             introduction: Introduction,
             filePath: FilePath,
             fileName:FileName,
+            tags: hashTags,
             category: Categories,
-            tags:hashtag,
             startDate: new Date(dateString[0]),
             endDate : new Date(dateString[1])
         }
@@ -123,7 +124,7 @@ function ImageUploadPage(props){
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <Form onSubmit>
-            <Input style={{border:'white', marginTop:'5rem'}}
+            <Input style={{border:'white', marginTop:'3rem'}}
                  size="large"
                  onChange={handleChangeTitle}
                  value={title}
@@ -137,7 +138,8 @@ function ImageUploadPage(props){
 
               <Link to="/image">
                 <Button
-                  type="primary" size="small">
+                  style={{background: '#48bcec', 
+                  color: 'white'}} size="small">
                   이미지
                 </Button>
               </Link>
@@ -164,11 +166,20 @@ function ImageUploadPage(props){
                         maxSize={800000000}>
                         {({ getRootProps, getInputProps }) => (
                             
-                            <div style={{ marginLeft:'20px', width: '50px', height: '10px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            <div style={{ 
+                                background: '#48bcec', 
+                                color: 'white', 
+                                paddingRight: '1rem', 
+                                paddingLeft: '1rem', 
+                                paddingTop: '0.2rem',
+                                paddingBottom: '0.2rem',
+                                border: '2px solid #48bcec',
+                                cursor: 'pointer'
+                            }} 
                                 {...getRootProps()}
                             >
                                 <input {...getInputProps()} />
-                                <Button size='small' type='primary'>이미지 추가</Button>
+                                <p style={{ marginBottom: '0'}}>이미지 추가</p>
 
                             </div>
                         )}
@@ -199,8 +210,10 @@ function ImageUploadPage(props){
                     placeholder="본문을 작성해주세요"
                 />
                 <br /><br />
-                <HashTag onChange={handleHashTag} value={hashtag}/><br/><br/>
-                <Button type="primary" size="large" onClick={onSubmit}>
+                <HashTag addTags={handleAddTags}/><br/><br/>
+                <Button style={{background: '#48bcec', 
+                                color: 'white', }} 
+                                size="large" onClick={onSubmit}>
                     제출
                 </Button>
                 <br/><br/>

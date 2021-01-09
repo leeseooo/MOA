@@ -41,7 +41,18 @@ function VideoDetailPage(props){
     const updateComment = (newComment) => {
       setCommentLists(CommentLists.concat(newComment))
   }
+  const sliceTag = (tag) => {
+      const slicedTag = (
+          <Tag>{tag}</Tag>
+      )
+      return (
+          <span>
+              {slicedTag}
+          </span>
+      )
+  }
   if(Video.writer){
+    const tagChild = Video.tags.map(sliceTag)
     return(
       <Row gutter={[16,16]}>
         <Col lg={18} xs={32}>
@@ -66,8 +77,8 @@ function VideoDetailPage(props){
                 />
               <List.Item>
           </List.Item>
-          {/* {Video.startDate}~{Video.endDate} */}
-          <Tag style={{marginLeft:'3rem'}}>{Image.tags !== '' && (<div>{Image.tags}해시태그자리</div>)}</Tag><hr/>
+          {Video.startDate}~{Video.endDate}
+          <Tag style={{marginLeft:'3rem'}}>{Video.tags !== '' && (<div>{tagChild}</div>)}</Tag><hr/>
           <Comment CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment}/>
           </div>
         </Col>

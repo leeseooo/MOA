@@ -151,7 +151,7 @@ function BroadCastForm(props) {
                 <HashTag addTags={handleAddTags} />
                 <br />
                 <br />
-                <Button type="primary" style={{ background: '#48bcec', paddingLeft: '0' }} size="large" onClick={onSubmit}>
+                <Button type="primary" style={{ background: '#48bcec'}} size="large" onClick={onSubmit}>
                     라이브 시작
                 </Button>
             </Form>

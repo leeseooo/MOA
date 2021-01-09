@@ -149,20 +149,20 @@ function LikeDislikes(props) {
         <React.Fragment>
             <span key="comment-basic-like">
                 <Tooltip title="Like">
-                    <div
+                    <span
                         theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
                         onClick={onLike} >
                             <LikeOutlined />
-                    </div>
+                    </span>
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Likes}</span>
             </span>&nbsp;&nbsp;
             <span key="comment-basic-dislike">
                 <Tooltip title="Dislike">
-                    <div
+                    <span
                         theme={DislikeAction === 'disliked' ? 'filled' : 'outlined'}
                         onClick={onDisLike}><DislikeOutlined />
-                    </div>
+                    </span>
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Dislikes}</span>
             </span>
