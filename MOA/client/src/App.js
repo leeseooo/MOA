@@ -18,6 +18,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <div style={{ paddingTop: '69px' }}>
       <Switch>
         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, true)} />
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/post/:imageId" component={Auth(PostPage),null}/>
         <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
       </Switch>
+      </div>
     </div>
   )}
 

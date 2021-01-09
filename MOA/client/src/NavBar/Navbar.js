@@ -30,7 +30,7 @@ function Navbar(props){
     }
 
     return (
-        <div style={{ position: 'fixed', zIndex: 5, width: '100%', display: 'flex', background: 'white' }}>
+        <div style={{ position: 'fixed', zIndex: 5, width: '100%', display: 'flex', background: 'white'}}>
             <IconContext.Provider value ={{ color: '#fff' }}>
             <div className='navbar'>
                 <Link to='#' className='menu-bars' style={{ paddingTop: '0', }}>
