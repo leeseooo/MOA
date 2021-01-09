@@ -17,7 +17,7 @@ export const SidebarData=[
     },
     {
         title:'부스생성',
-        path:'/',
+        path:'/video/upload',
         icon:<GiIcons.GiGearHammer style={{color:"#F3868D",fontSize:"40",paddingBottom:"10px"}}/>,
         cName:'nav-text'
     },

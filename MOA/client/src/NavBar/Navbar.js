@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import {Link} from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { SidebarData } from './SidebarData';
+import {SidebarData} from'./SidebarData';
 import axios from 'axios';
 import './Navbar.css';
-import { IconContext } from 'react-icons';
-import moalogo from '../mainpage/pictures/moa.png'
-import {withRouter} from 'react-router-dom';
+import {IconContext} from 'react-icons';
+import moalogo from '../mainpage/pictures/moa.png';
+import { withRouter } from 'react-router-dom';
 
+function Navbar(props){
 
-function Navbar(props) {
-
+    
     const user = useSelector(state => state.user);
 
-    const [sidebar, setSidebar] = useState(false);
-    const showSidebar = () => setSidebar(!sidebar);
+    const [sidebar, setSidebar]=useState(false);
+    const showSidebar=()=> setSidebar(!sidebar);
 
     const handleLogout = () => {
         axios.get('/api/user/logout')
@@ -67,4 +67,4 @@ function Navbar(props) {
     )
 }
 
-export default Navbar
+export default withRouter(Navbar) 

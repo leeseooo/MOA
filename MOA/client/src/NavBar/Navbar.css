@@ -10,12 +10,11 @@
   }
   
   .menu-bars {
-    margin-left: 1rem;
+    margin-left: 2rem;
     font-size: 2rem;
     background: none;
     color: #F3868D;
     margin-right: 1rem;
-    padding-top: 0%;
   }
   
   .nav-menu {
@@ -75,9 +74,6 @@
     align-items: center;
   }
   
-  span {
-    margin-left: 16px;
-  }
   @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
   .loginbutton{
     position: absolute;

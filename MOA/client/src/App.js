@@ -1,5 +1,6 @@
-import { Route, Switch } from 'react-router-dom';
-import React, { Suspense, useEffect } from 'react';
+
+import React, { Suspense } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Navbar from './NavBar/Navbar'
 import MainPage from './mainpage/Mainpage'
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
@@ -13,12 +14,11 @@ import BroadCastPage from "./LiveVideoPage/BroadCastPage/BroadCastPage";
 import LiveVideoPage from "./LiveVideoPage/LiveVideoPage/LiveVideoPage";
 import Auth from "./hoc/auth";
 
-
 function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <Navbar />
-      <div style={{ paddingTop: '69px' }}></div>
+      <div style={{ paddingTop: '69px' }}>
 
       <Switch>
           <Route exact path="/" component={Auth(MainPage, null)} />
@@ -32,6 +32,7 @@ function App() {
           <Route exact path="/broadcast/:broadcastId" component={Auth(BroadCastPage, true)}/>
           <Route exact path="/liveVideo/:liveId" component={Auth(LiveVideoPage, null)}/>
       </Switch>
+      </div>
     </Suspense>
   );
 }

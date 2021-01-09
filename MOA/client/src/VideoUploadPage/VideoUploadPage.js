@@ -125,10 +125,9 @@ function VideoUploadPage(props){
 
     }
     return(
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-
+        <div style={{ maxWidth: '700px', margin: '2rem auto'}}>-
             <Form onSubmit={onSubmit}>
-              <Input style={{border:'white'}}
+              <Input style={{border:'white', marginTop:'5rem'}}
                  size="large"
                  onChange={handleChangeTitle}
                  value={title}
