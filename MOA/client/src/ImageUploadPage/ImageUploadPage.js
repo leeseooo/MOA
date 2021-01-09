@@ -190,8 +190,6 @@ function ImageUploadPage(props){
                     placeholder="이미지를 소개해주세요(900자 제한)"
                 />
                 <br /><br />
-                <button onClick> ◀ </button>
-                <button onClick> ▶ </button>
                 <hr />
                 <br />
                 <label>본문</label><br/>

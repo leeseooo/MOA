@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Divider, Avatar } from 'antd';
+import axios from 'axios';
+import moment from 'moment';
 
 import "antd/dist/antd.css";
 
+const { Meta } = Card;
 //날짜를 0000-00-00 이런식으로 필터링 해줄것
 //정렬 추천순은 좋아요가 없어서 구현 안됨
 function ResultBooths(props) {
 
     //state
     const [Booths, setBooths] = useState([]);
-    const [video, setVideo] = useState([]);
+    const [Video, setVideo] = useState([]);
+    const [Image, setImage] = useState([])
 
     let searched = []
 
@@ -46,7 +50,41 @@ function ResultBooths(props) {
                 }
             })
 
+        axios.get('/api/image/getImages')
+            .then(response => {
+              if(response.data.success){
+                  setImage(response.data.images)
+              }else{
+                alert('image 가져오기를 실패했습니다.');
+              }
+            })
+
     }, [props.alignType])
+
+    const renderCards = Video.map((video, index)=>{
+        return <Col key={index}>
+            <div>
+                <img style={{width:'100%'}} src />
+                <div style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
+                    color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
+                    padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
+                    fontWeight:'500', lineHeight:'12px'}}>
+                        {/* 동영상 분 초 보여주기 */}
+                    </div>
+            </div>
+            <Meta avatar={
+                <Avatar src />
+            }
+            title={video.title}
+            />
+            <span>{video.writer.name}</span><br />
+            <span style={{marginLeft:'3rem'}}>{video.views}</span>
+            - <span> {moment(video.createdAt).format("YYYY-MM-DD")} </span>
+        </Col>
+    })
+    const renderImageCards = Image.map((image, index)=>{
+        return <div></div>
+    })
 
     //현재, 예정, 지난 부스로 구분
     const sortBooths = (sort) => {
@@ -110,18 +148,18 @@ function ResultBooths(props) {
             case "recommend":
                 break;
             case "date":
-                video.sort(function (a, b) {
+                Video.sort(function (a, b) {
                     return a.createAt < b.createAt ? -1 : a.createAt > b.createAt ? 1 : 0;
                 })
                 break;
             case "name":
-                video.sort(function (a, b) {
+                Video.sort(function (a, b) {
                     return a.title < b.title ? -1 : a > b ? 1 : 0;
                 })
                 break;
         }
 
-        var renderCards = video.map((video, index) => {
+        var renderCards = Video.map((video, index) => {
 
             let minutes = Math.floor(video.duration / 60);
             let seconds = Math.floor(video.duration - minutes * 60);
