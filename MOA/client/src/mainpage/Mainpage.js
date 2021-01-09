@@ -1,8 +1,11 @@
 import React, { Component, useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
-import MainSearchPage from './Sections/MainSearchPage';
-import MainLivePage from './MainSecttions/MainLivePage';
+import MainSearchPage from './MainSections/MainSearchPage';
+import MainLivePage from './MainSections/MainLivePage'
+import MainCategoryButton from './MainSections/MainCategoryButton';
+import CurrentExhibitPage from './MainSections/CurrentExhibitPage';
+import PlannedExhibitPage from './MainSections/PlannedExhibitPage';
 
 
 function Mainpage () {
@@ -16,3 +19,6 @@ function Mainpage () {
         </div>
     )
 }
+
+
+export default Mainpage

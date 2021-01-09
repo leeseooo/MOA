@@ -9,7 +9,8 @@ import { USER_SERVER } from '../Config.js';
 
 export function registerUser(dataToSubmit){
     const request = axios.post(`${USER_SERVER}/register`,dataToSubmit)
-        .then(response => response.data);
+        .then(response => response.data)
+        .catch(err => console.log(err.message));
     
     return {
         type: REGISTER_USER,
