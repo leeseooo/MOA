@@ -2,11 +2,12 @@
 import { Router, Route } from 'react-router-dom';
 
 import RegisterPage from './RegisterPage/RegisterPage';
+import LoginPage from './LoginPage/LoginPage';
 
 function App() {
   return (
     <div>
-      <RegisterPage/>
+      <LoginPage/>
       {/* <Router>
         <switch>
           <Route exact path="/" component={RegisterPage} />
