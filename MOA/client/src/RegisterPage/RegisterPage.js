@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
-import moment from "moment";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
 import moment from 'moment';
-import axios from 'axios';
 
 
 function RegisterPage(props) {

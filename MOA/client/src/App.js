@@ -1,15 +1,15 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
-import Navbar from './NavBar/Navbar'
-import MainLandingPage from './MainLandingPage/MainLandingPage'
-import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
-import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
-import ImageUploadPage from './ImageUploadPage/ImageUploadPage'
+import Navbar from './NavBar/Navbar';
+import VideoUploadPage from './VideoUploadPage/VideoUploadPage';
+import VideoDetailPage from './VideoDetailPage/VideoDetailPage';
+import ImageUploadPage from './ImageUploadPage/ImageUploadPage';
 import RegisterPage from "./RegisterPage/RegisterPage.js";
 import LoginPage from "./LoginPage/LoginPage";
 import SearchResultPage from "./SearchResultPage/SearchResultPage";
 import Auth from "./hoc/auth";
-import Navbar from "./NavBar/Navbar";
+import MainPage from "./mainpage/Mainpage";
+
 import Axios from 'axios'
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         {/* <Route exact path="/broadcastform" component={Auth(BroadCastForm, null)} /> */}
         {/* <Route exact path="/liveVideo/:liveId" component={Auth(LiveVideoPage, null)} /> */}
         <Route exact path="/video/upload" component={Auth(VideoUploadPage, null)} />
-        {/* <Route exact path="/image/upload" component={Auth(ImageUploadPage, null)} /> */}
+        <Route exact path="/image/upload" component={Auth(ImageUploadPage, null)} />
         <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
         {/* <Route exact path="/carousel" component={Carouseltest} /> */}
       </Switch>
