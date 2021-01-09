@@ -5,6 +5,15 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+})
+
+
 const config = require("./config/key");
 
 const mongoose = require('mongoose');
@@ -20,9 +29,49 @@ app.use(cookieParser());
 app.use('/api/user', require('./routes/user'));
 app.use('/api/video', require('./routes/video'));
 app.use('/api/image', require('./routes/image'));
-
+app.use('/api/liveVideo', require('./routes/liveVideo'));
+// app.use('/api/like', require('./routes/like'));
+// app.use('/api/subscribe', require('./routes/subscribe'));
+// app.use('/api/comment', require('./routes/comment'));
 
 app.use('/uploads', express.static('uploads'));
+
+let broadcaster;
+io.on('connection', socket => {
+
+  /* live video */
+  socket.on("broadcaster", () => {
+    broadcaster = socket.id;
+    console.log("broadcaster set: ", broadcaster)
+    socket.emit("broadcaster", broadcaster);
+  })
+
+  socket.on("watcher", () => {
+    socket.to(broadcaster).emit("watcher", socket.id);
+    console.log("watcher set: ", socket.id);
+    console.log("broadcasterId: ", broadcaster);
+  })
+
+  socket.on("offer", (id, message) => {
+    socket.to(id).emit("offer", socket.id, message);
+    console.log("offer sent: ", message);
+  })
+
+  socket.on("answer", (id, message) => {
+    socket.to(id).emit("answer", socket.id, message);
+    console.log("answer sent");
+  })
+
+  socket.on("candidate", (id, message) => {
+    socket.to(id).emit("candidate", socket.id, message);
+    console.log("candidate", message);
+  })
+
+  /* live chat */
+  
+})
+
+
 
 if (process.env.NODE_ENV === "production") {
     
@@ -36,4 +85,4 @@ if (process.env.NODE_ENV === "production") {
 
 
 const port = 5000;
-app.listen(port, () => console.log(`App listening on port ${port}`))
+server.listen(port, () => console.log(`App listening on port ${port}`))

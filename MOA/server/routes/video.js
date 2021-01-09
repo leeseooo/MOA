@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
+const moment = require('moment');
 
 const { Video } = require("../models/Video");
 const { auth } = require("../middleware/auth");
@@ -11,7 +12,7 @@ var storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname)
+        cb(null, moment().format('YYYYMMDDHHmm') + "_" + file.originalname)
     },
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname)
@@ -165,6 +166,15 @@ router.get('/getCurrentVidoes', (req, res) => {
             res.status(200).json({ success: true, videos })
         })
 })
-    
+
+router.post('/search', (req, res) => {
+    Video.find({ 
+        title : {'$regex': req.body.query, '$options': 'i' }})
+        .populate('writer')
+        .exec((err, video) => {
+            if (err) return res.status(400).json({ success: false, err});
+            res.status(200).json({ success: true, video })
+        })
+})
 
 module.exports = router;

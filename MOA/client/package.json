@@ -26,6 +26,7 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "slick-slider": "^1.8.2",
+    "socket.io-client": "^3.0.5",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -53,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.3.0",
     "react-alice-carousel": "^2.2.0"
   }
 }

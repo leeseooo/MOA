@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const moment = require('moment');
 
 const { Image } = require("../models/Image");
 
@@ -9,7 +10,7 @@ var storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname+" ")
+        cb(null, moment().format('YYYYMMDDHHmm') + "_" + file.originalname)
     },
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname)
@@ -75,5 +76,42 @@ router.post("/getImageDetail", (req, res) => {
         res.status(200).json({ success: true, image })
     })
 });
+
+//검색된 이미지 카드 가져오기
+router.post("/search", (req, res) => {
+    Image.find({
+        title: { '$regex': req.body.query, '$options': 'i' }
+    }).populate('writer')
+    .exec((err, image) => {
+        if (err) {
+            return res.json({
+                find: false,
+                message: "찾을 수 없습니다."
+            })
+        }
+
+        console.log("검색된 이미지카드", image)
+        return res.status(200).json({ find: true, image })
+    })
+})
+
+//사용자의 이미지 카드 가져오기
+router.post('/getBooth/myBooths', (req, res) => {
+    let now = getCurrentDate();
+
+    Booth.find({ owner: req.body.owner })
+    .populate('image')
+    .exec((err, booth) => {
+        if (!booth) {
+            return res.json({
+                find: false,
+                message: "찾을 수 없습니다."
+            })
+        }
+
+        //console.log("in getBooth", booth)
+        return res.status(200).json({ find: true, booth })
+    })
+})
 
 module.exports = router;
