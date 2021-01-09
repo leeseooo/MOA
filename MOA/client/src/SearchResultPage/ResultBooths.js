@@ -20,23 +20,24 @@ function ResultBooths(props) {
     useEffect(() => {
 
         const body = {
-            query: "test"
+            query: "image"
         }
 
         //검색된 부스 가져오기
-        axios.post("/api/booth/getBooth/search", body)
+        axios.post("/api/image/getImages", body)
             .then(response => {
                 searched = searched.concat(response.data.booth)
                 console.log("searched", searched)
 
                 if (searched.length !== 0) {
-                    //console.log("in if")
                     setBooths(searched)
                 }
 
             })
             .catch(err => {
-                console.log("error message", err.message)
+                if(err.response){
+                    console.log(err.message)
+                }
             })
 
         //비디오 가져오기
@@ -50,14 +51,14 @@ function ResultBooths(props) {
                 }
             })
 
-        axios.get('/api/image/getImages')
-            .then(response => {
-              if(response.data.success){
-                  setImage(response.data.images)
-              }else{
-                alert('image 가져오기를 실패했습니다.');
-              }
-            })
+        // axios.get('/api/image/getImages')
+        //     .then(response => {
+        //       if(response.data.success){
+        //           setImage(response.data.images)
+        //       }else{
+        //         alert('image 가져오기를 실패했습니다.');
+        //       }
+        //     })
 
     }, [props.alignType])
 
