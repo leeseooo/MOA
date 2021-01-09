@@ -45,7 +45,7 @@ function VideoDetailPage(props){
                             조회수 {Video.views}회
                             <span> {moment(Video.createdAt).format("YYYY-MM-DD")} </span>
                     </List.Item>
-                    <List.Item
+                    {/* <List.Item
                         actions={[<LikeDislikes video videoId={videoId} 
                             userId={localStorage.getItem('userId')}  />,
                             <Subscriber usetTo={Video.writer._id} 
@@ -55,7 +55,7 @@ function VideoDetailPage(props){
                             avatar={<Avatar src={Video.writer && Video.writer.image} />}
                             description={Video.writer.name}
                             />
-                    </List.Item>
+                    </List.Item> */}
                         <List.Item.Meta
                             style={{ marginLeft:'3rem' }}
                             description={Video.description}
@@ -64,11 +64,11 @@ function VideoDetailPage(props){
                     <Tag style={{ marginLeft:'3rem'}}>
                         {Image.tag !== '' && (<div>{Image.tags}해시태그자리</div>)}
                     </Tag><hr/>
-                    <Comment CommentList={CommentLists} postId={Video._id} refreshFunction={updateComment}/>
+                    {/* <Comment CommentList={CommentLists} postId={Video._id} refreshFunction={updateComment}/> */}
                 </div>
             </Col>
             <Col lg={6} xs={24}>
-                <SideVideo />
+                {/* <SideVideo /> */}
             </Col>
         </Row>
     )

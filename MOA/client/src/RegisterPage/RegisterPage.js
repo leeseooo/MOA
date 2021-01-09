@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
+import moment from 'moment';
+import axios from 'axios';
 
 
 function RegisterPage(props) {
@@ -55,7 +57,7 @@ function RegisterPage(props) {
         }
 
         // 임시 프로필 저장
-        axios.post('/api/profile/saveProfile', profile)
+        axios.post('/api/user/saveProfile', profile)
             .then(res => {
                 console.log(res)
             })

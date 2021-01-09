@@ -32,6 +32,16 @@ const userSchema = mongoose.Schema({
     },
     tokenExp :{
         type: Number
+    },
+    id:{
+        type: String
+    },
+    nickName: {
+        type: String
+    },
+    profileImg: String,
+    content: {
+        type: String
     }
 })
 
