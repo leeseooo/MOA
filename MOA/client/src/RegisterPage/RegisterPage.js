@@ -3,6 +3,13 @@ import { Input, Button } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9aa0f9b4444b902690c10a3a4f2d144c00aa779
+>>>>>>> fbace1a1f601ccf83c71286fb7d1c75ad7f5ebd0
 
 
 function RegisterPage(props) {

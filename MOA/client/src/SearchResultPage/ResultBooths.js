@@ -38,7 +38,11 @@ function ResultBooths(props) {
             })
 
         //비디오 가져오기
+<<<<<<< HEAD
         axios.post('/api/video/search', body)
+=======
+        axios.get('/api/video/getVideos', body)
+>>>>>>> fbace1a1f601ccf83c71286fb7d1c75ad7f5ebd0
             .then(res => {
                 if (res.data.success) {
                     console.log("현재 비디오", res.data);

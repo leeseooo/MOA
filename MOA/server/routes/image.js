@@ -79,20 +79,19 @@ router.post("/getImageDetail", (req, res) => {
 
 //검색된 이미지 카드 가져오기
 router.post("/search", (req, res) => {
-    Booth.find({
+    Image.find({
         title: { '$regex': req.body.query, '$options': 'i' }
     }).populate('writer')
     .exec((err, image) => {
-        if (!image) {
-            console.log("검색이 안됨")
+        if (err) {
             return res.json({
                 find: false,
                 message: "찾을 수 없습니다."
             })
         }
 
-        console.log("검색된 booth", booth)
-        return res.status(200).json({ find: true, booth })
+        console.log("검색된 이미지카드", image)
+        return res.status(200).json({ find: true, image })
     })
 })
 
