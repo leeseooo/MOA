@@ -8,11 +8,8 @@ import '../Mainpage.css';
 function MainLivePage(){
     const [liveVideo, setLiveVideo] = useState([]);
 
-<<<<<<< HEAD
     
 
-=======
->>>>>>> 4c958da314e21fc7d3444ba74b8b8827eb3dbed6
     useEffect(() => {
         Axios.get('/api/liveVideo/getliveVidoes')
         .then(res => {
@@ -25,7 +22,6 @@ function MainLivePage(){
         })
     }, [])
 
-<<<<<<< HEAD
     
 
     let liveRenderCards = [];
@@ -75,8 +71,6 @@ function MainLivePage(){
         console.log(length);
     }
 
-=======
->>>>>>> 4c958da314e21fc7d3444ba74b8b8827eb3dbed6
     return (
         <div className='mainpage_below' style={{textAlign:'center', backgroundSize:'cover'}} height="100vh">
             
