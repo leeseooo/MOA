@@ -17,13 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/api/users', require('./routes/users'));
+app.use('/api/user', require('./routes/user'));
 app.use('/api/video', require('./routes/video'));
 app.use('/api/image', require('./routes/image'));
 
-app.get('/api/hello', (req, res) => {
-  return 'hello'
-})
 
 app.use('/uploads', express.static('uploads'));
 
