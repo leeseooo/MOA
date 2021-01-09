@@ -7,7 +7,7 @@ import LoginPage from './LoginPage/LoginPage';
 function App() {
   return (
     <div>
-      <LoginPage/>
+      <RegisterPage/>
       {/* <Router>
         <switch>
           <Route exact path="/" component={RegisterPage} />

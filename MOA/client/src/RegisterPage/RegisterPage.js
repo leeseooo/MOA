@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../actions/user_action';
 
-function RegisterPage() {
+
+function RegisterPage(props) {
+    //디스패치 함수 가져오기
+    const dispatch = useDispatch();
+
     //state 설정
     const [Id, setId] = useState("")
     const [Name, setName] = useState("")
@@ -26,7 +32,47 @@ function RegisterPage() {
 
     //onSubmit 처리(서버전달)
     const onSubmitHandler = (event) => {
+        event.preventDefault();
 
+        if (Password !== ConfirmPassword) {
+            return alert("비밀번호와 비밀번호 확인은 같아야 합니다.")
+        }
+
+        //서버로 전달할 state값을 모은 객체
+        let body = {
+            Id: Id,
+            password: Password,
+            name: Name,
+        }
+
+        //서버로 전달할 임시 프로필 객체
+        const profile = {
+            id: Id,
+            nickName: Name,
+            profileImg: "",
+            content: "",
+        }
+
+        //임시 프로필 저장
+        // axios.post('/api/profile/saveProfile', profile)
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => {
+        //         console.log(err.message)
+        //     })
+
+        //디스패치
+        dispatch(registerUser(body))
+            .then(response => {
+                if (response.payload.success) {
+                    //submit시 로그인 페이지로 이동
+                    props.history.push('/login')
+                }
+                else {
+                    alert('Error')
+                }
+            })
     }
 
     return (
