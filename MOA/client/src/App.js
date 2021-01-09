@@ -4,9 +4,9 @@ import MainPage from './mainpage/Mainpage'
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
 import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
 import ImageUploadPage from './ImageUploadPage/ImageUploadPage'
-import LandingPage from "./LandingPage/LandingPage.js";
 import RegisterPage from "./RegisterPage/RegisterPage.js";
 import LoginPage from "./LoginPage/LoginPage";
+import SearchResultPage from "./SearchResultPage/SearchResultPage";
 import Auth from "./hoc/auth";
 import Axios from 'axios'
 
@@ -20,6 +20,7 @@ function App() {
           <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />
           <Route exact path="/image" component={Auth(ImageUploadPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
+          <Route exact path="/search" component={Auth(SearchResultPage, null)}/>
       </Switch>
     </div>
   );
