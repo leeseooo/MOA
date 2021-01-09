@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const moment = require('moment');
 
 const { Image } = require("../models/Image");
 
