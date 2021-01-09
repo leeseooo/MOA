@@ -22,7 +22,6 @@ function MainLivePage(){
         })
     }, [])
 
-    
 
     let liveRenderCards = [];
     if (liveVideo !== 0) {
@@ -70,6 +69,7 @@ function MainLivePage(){
         console.log(paddings);
         console.log(length);
     }
+
 
     return (
         <div className='mainpage_below' style={{textAlign:'center', backgroundSize:'cover'}} height="100vh">

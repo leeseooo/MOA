@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/login" component={Auth(LoginPage, true)} />
         <Route exact path="/register" component={Auth(RegisterPage, null)} />
         <Route exact path="/search" component={Auth(SearchResultPage, null)} />     
-        <Route exact path="/broadcast" component={Auth(BroadCastPage, true)} />
+        <Route exact path="/broadcast/:broadcastId" component={Auth(BroadCastPage, true)} />
         <Route exact path="/broadcastform" component={Auth(BroadCastForm, true)} />
         <Route exact path="/liveVideo/:liveId" component={Auth(LiveVideoPage, true)} />
         <Route exact path="/upload" component={Auth(VideoUploadPage, true)} />
