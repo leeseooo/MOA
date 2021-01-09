@@ -1,13 +1,22 @@
 import { Route, Switch } from 'react-router-dom';
+<<<<<<< HEAD
 import React, { Suspense, useEffect } from 'react';
 import Navbar from './NavBar/Navbar';
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage';
 import VideoDetailPage from './VideoDetailPage/VideoDetailPage';
 import ImageUploadPage from './ImageUploadPage/ImageUploadPage';
+=======
+import React, { Suspense } from 'react';
+import Navbar from './NavBar/Navbar'
+import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
+import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
+import ImageUploadPage from './ImageUploadPage/ImageUploadPage'
+>>>>>>> cc58a973a2cc2a5d7c309aef5619fcd6fec24cbb
 import RegisterPage from "./RegisterPage/RegisterPage.js";
 import LoginPage from "./LoginPage/LoginPage";
 import SearchResultPage from "./SearchResultPage/SearchResultPage";
 import Auth from "./hoc/auth";
+<<<<<<< HEAD
 import MainPage from "./mainpage/Mainpage";
 
 import Axios from 'axios'
@@ -17,6 +26,13 @@ function App() {
     <Suspense fallback={(<div>Loading...</div>)}>
       <Navbar />
       <div style={{ paddingTop: '69px' }}>
+=======
+
+function App() {
+  return (
+    <div>
+      <Navbar/>
+>>>>>>> cc58a973a2cc2a5d7c309aef5619fcd6fec24cbb
       <Switch>
         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
