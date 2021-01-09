@@ -77,4 +77,41 @@ router.post("/getImageDetail", (req, res) => {
     })
 });
 
+//검색된 이미지 카드 가져오기
+router.post("/search", (req, res) => {
+    Image.find({
+        title: { '$regex': req.body.query, '$options': 'i' }
+    }).populate('writer')
+    .exec((err, image) => {
+        if (err) {
+            return res.json({
+                find: false,
+                message: "찾을 수 없습니다."
+            })
+        }
+
+        console.log("검색된 이미지카드", image)
+        return res.status(200).json({ find: true, image })
+    })
+})
+
+//사용자의 이미지 카드 가져오기
+router.post('/getBooth/myBooths', (req, res) => {
+    let now = getCurrentDate();
+
+    Booth.find({ owner: req.body.owner })
+    .populate('image')
+    .exec((err, booth) => {
+        if (!booth) {
+            return res.json({
+                find: false,
+                message: "찾을 수 없습니다."
+            })
+        }
+
+        //console.log("in getBooth", booth)
+        return res.status(200).json({ find: true, booth })
+    })
+})
+
 module.exports = router;
