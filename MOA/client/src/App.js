@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
 import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
@@ -19,12 +19,12 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Auth(LandingPage, null)} />
-        <Route exact path="/login" component={Auth(LoginPage, false)} />
-        <Route exact path="/register" component={Auth(RegisterPage, false)} />
-        <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />
-        <Route exact path="/image" component={Auth(ImageUploadPage, true)} />
-        <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
+          <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/login" component={Auth(LoginPage, false)} />
+          <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />
+          <Route exact path="/image" component={Auth(ImageUploadPage, true)} />
+          <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
       </Switch>
     </div>
   );

@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import Reducer from './Reducers';
+import Reducer from './_reducers';
+import { BrowserRouter } from 'react-router-dom';
 
 
 
@@ -22,7 +23,9 @@ ReactDOM.render(
       window.__REDUX_DEVTOOLS_EXTENSION__()
     )}
   >
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
