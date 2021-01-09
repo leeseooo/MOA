@@ -166,6 +166,15 @@ router.get('/getCurrentVidoes', (req, res) => {
             res.status(200).json({ success: true, videos })
         })
 })
-    
+
+router.post('/search', (req, res) => {
+    Video.find({ 
+        title : {'$regex': req.body.query, '$options': 'i' }})
+        .populate('writer')
+        .exec((err, video) => {
+            if (err) return res.status(400).json({ success: false, err});
+            res.status(200).json({ success: true, video })
+        })
+})
 
 module.exports = router;

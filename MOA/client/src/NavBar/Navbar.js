@@ -6,9 +6,33 @@ import { useSelector } from "react-redux";
 import {SidebarData} from'./SidebarData';
 import axios from 'axios';
 import './Navbar.css';
+<<<<<<< HEAD
 import {IconContext} from 'react-icons';
 import moalogo from '../mainpage/pictures/moa.png';
 import { withRouter } from 'react-router-dom';
+=======
+<<<<<<< HEAD
+import {IconContext} from 'react-icons';
+import moalogo from '../mainpage/pictures/moa.png';
+import { withRouter } from 'react-router-dom';
+=======
+<<<<<<< HEAD
+import { IconContext } from 'react-icons';
+import moalogo from '../pictures/moalogo.png';
+import {withRouter} from 'react-router-dom';
+=======
+<<<<<<< HEAD
+import { IconContext } from 'react-icons';
+import moalogo from '../pictures/moalogo.png';
+import {withRouter} from 'react-router-dom';
+=======
+import {IconContext} from 'react-icons';
+import moalogo from '../mainpage/pictures/moa.png';
+import { withRouter } from 'react-router-dom';
+>>>>>>> e9aa0f9b4444b902690c10a3a4f2d144c00aa779
+>>>>>>> fbace1a1f601ccf83c71286fb7d1c75ad7f5ebd0
+>>>>>>> cdda10cee7cef18d58d993af74f56c6581c94e32
+>>>>>>> a8b1982ddac33b56b6d997678cec76b199ead77e
 
 function Navbar(props){
 

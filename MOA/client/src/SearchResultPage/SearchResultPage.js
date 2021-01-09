@@ -7,7 +7,7 @@ import ReasultCards from './ResultBooths';
 const {Option} = Select
 
 function SearchResultPage() {
-    const [alignType, setAlignType] = useState("recommend");
+    const [alignType, setAlignType] = useState("date");
 
     const onChangeHandler = (value) => {
         setAlignType(value)

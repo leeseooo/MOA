@@ -45,7 +45,12 @@ function MyBoothCards() {
                 }
             })
             .catch(err => {
-                console.log(err.message)
+                if (error.response) { // if there is response, it means its not a 50x, but 4xx
+                    console.log("there is response")
+                } else {   // gets activated on 50x errors, since no response from server
+                  // do whatever you want here :)
+                  console.log("no res")
+                }       
             })
         
     }, [])
