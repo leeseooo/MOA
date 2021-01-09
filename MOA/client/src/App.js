@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
+import MainPage from './mainpage/Mainpage'
 import VideoUploadPage from './VideoUploadPage/VideoUploadPage'
 import VideoDetailPage from './VideoDetailPage/VideoDetailPage'
 import ImageUploadPage from './ImageUploadPage/ImageUploadPage'
@@ -11,15 +12,10 @@ import Axios from 'axios'
 
 function App() {
 
-  useEffect(() => {
-    Axios.get('/api/hello')
-      .then((res) => console.log(res))
-  }, [])
-
   return (
     <div>
       <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/" component={Auth(MainPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />

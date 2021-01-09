@@ -21,3 +21,5 @@ function MainLivePage(){
         </div>
     )
 }
+
+export default MainLivePage;

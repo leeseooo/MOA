@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../actions/user_action';
+import { registerUser } from '../_actions/user_actions';
 
 
 function RegisterPage(props) {
@@ -72,6 +72,9 @@ function RegisterPage(props) {
                 else {
                     alert('Error')
                 }
+            })
+            .catch(err => {
+                console.log(err.message)
             })
     }
 
