@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
-const moment = require('moment');
 
 const { Video } = require("../models/Video");
 const { auth } = require("../middleware/auth");
@@ -12,7 +11,7 @@ var storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, moment().format('YYYYMMDDHHmm') + "_" + file.originalname)
+        cb(null, file.originalname)
     },
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname)

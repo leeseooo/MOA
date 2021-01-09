@@ -9,6 +9,7 @@ import RegisterPage from "./RegisterPage/RegisterPage.js";
 import LoginPage from "./LoginPage/LoginPage";
 import Auth from "./hoc/auth";
 import Axios from 'axios'
+import SearchResultPage from './SearchResultPage/SearchResultPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/upload" component={Auth(VideoUploadPage, null)} />
           <Route exact path="/image" component={Auth(ImageUploadPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
+          <Route exact path="/search" component={Auth(SearchResultPage, null)} />
       </Switch>
     </div>
   );
