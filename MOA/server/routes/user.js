@@ -24,6 +24,7 @@ router.get('/auth', auth, (req, res) => {
 router.post('/register', (req, res) => {
 
     const user = new User(req.body);
+    console.log(req.body)
 
     user.save((err, doc) => {
         if (err) return res.json({ success: false, err })
@@ -63,5 +64,67 @@ router.get('/logout', auth, (req, res) => {
         })
     })
 })
+
+//프로필 저장
+router.post('/saveProfile', (req, res) => {
+    // const profile = new User(req.body)
+  
+    // profile.save((err, profileInfo) => {
+    //   if (err) return res.json({ success: false, err })
+  
+    //   return res.status(200).json({
+    //     success: true
+    //   })
+    // })
+
+    Profile.updateOne(
+        { id: req.body.id },
+        {
+          $set: {
+            "nickName": req.body.nickName,
+            "image": req.body.profileImg,
+            "content": req.body.content,
+          }
+        }, (err, User) => {
+          if (err) return res.json({ success: false, err })
+    
+          return res.status(200).json({
+            success: true
+          })
+        })
+  })
+  
+  //프로필 가져오기
+router.post('/getProfile', (req, res) => {
+    Profile.findOne({ email: req.body.email }, (err, User) => {
+      if (!User) {
+        return res.json({
+          findSuccess: false,
+          message: "프로필을 찾을 수 없습니다."
+        })
+      }
+  
+      res.status(200).json({ findSuccess: true, User })
+    })
+  })
+  
+// router.post('/updateProfile', (req, res) => {
+//     Profile.updateOne(
+//       { id: req.body.id },
+//       {
+//         $set: {
+//           "nickName": req.body.nickName,
+//           "profileImg": req.body.profileImg,
+//           "content": req.body.content,
+//         }
+//       }, (err, profile) => {
+//         if (err) return res.json({ success: false, err })
+  
+//         return res.status(200).json({
+//           success: true
+//         })
+//       })
+  
+//   })
 
 module.exports = router;

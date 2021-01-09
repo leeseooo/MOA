@@ -54,13 +54,13 @@ function RegisterPage(props) {
         }
 
         //임시 프로필 저장
-        // axios.post('/api/profile/saveProfile', profile)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => {
-        //         console.log(err.message)
-        //     })
+        axios.post('/api/profile/saveProfile', profile)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
 
         //디스패치
         dispatch(registerUser(body))

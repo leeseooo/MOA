@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { Input, Button, Select } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+
+import ReasultCards from './ResultBooths';
 
 function SearchResultPage() {
     const [alignType, setAlignType] = useState("recommend");
@@ -24,7 +28,6 @@ function SearchResultPage() {
                     style={{ width: "100px" }}
                     onChange={onChangeHandler}
                 >
-                    <Option value="recommend">추천순</Option>
                     <Option value="date">날짜순</Option>
                     <Option value="name">이름순</Option>
                 </Select>

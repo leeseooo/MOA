@@ -11,7 +11,6 @@ import Auth from "./hoc/auth";
 import Axios from 'axios'
 
 function App() {
-
   return (
     <div>
       <Switch>

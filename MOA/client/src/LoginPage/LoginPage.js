@@ -54,14 +54,14 @@ function LoginPage(props) {
                 width: '100%', height: '100vh'
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h1 class="mainText">Welcome!</h1>
+                    <h1 className="mainText">Welcome!</h1>
                     <lable>아이디</lable>
                     <Input value={email} onChange={onEmailHandler} />
                     <lable>비밀번호</lable>
                     <Input type="password" value={Password} onChange={onPasswordHandler} onPressEnter={onSubmitHandler} />
                     <br />
                     <Button>
-                        <Link to="/register">회원가입</Link>
+                            <Link to="/register">회원가입</Link>
                     </Button>
                     <Button type="primary" onClick={onSubmitHandler}>Login</Button>
                 </div>
