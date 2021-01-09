@@ -6,15 +6,9 @@ import { useSelector } from "react-redux";
 import {SidebarData} from'./SidebarData';
 import axios from 'axios';
 import './Navbar.css';
-<<<<<<< HEAD
 import {IconContext} from 'react-icons';
 import moalogo from '../mainpage/pictures/moa.png';
 import { withRouter } from 'react-router-dom';
-=======
-import { IconContext } from 'react-icons';
-import moalogo from '../pictures/moalogo.png';
-import {withRouter} from 'react-router-dom';
->>>>>>> cc58a973a2cc2a5d7c309aef5619fcd6fec24cbb
 
 function Navbar(props){
 

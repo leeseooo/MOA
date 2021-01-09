@@ -74,9 +74,6 @@
     align-items: center;
   }
   
-  span {
-    margin-left: 16px;
-  }
   @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
   .loginbutton{
     position: absolute;
