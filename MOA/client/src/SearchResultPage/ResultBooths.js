@@ -12,26 +12,24 @@ function ResultBooths(props) {
     //state
     const [Booths, setBooths] = useState([]);
     const [Video, setVideo] = useState([]);
-    const [Image, setImage] = useState([])
 
     let searched = []
+    let videoSearched = []
 
     useEffect(() => {
 
-        const body = {
-            query: "image"
+        let body = {
+            query: "test"
         }
 
-        //검색된 부스 가져오기
-        axios.post("/api/image/getImages", body)
+        //검색된 이미지 카드(부스) 가져오기
+        axios.post("/api/image/search", body)
             .then(response => {
-                searched = searched.concat(response.data.booth)
-                console.log("searched", searched)
-
+                searched = searched.concat(response.data.image)
+                console.log("현재 이미지 카드", searched)
                 if (searched.length !== 0) {
                     setBooths(searched)
                 }
-
             })
             .catch(err => {
                 if(err.response){
@@ -40,24 +38,20 @@ function ResultBooths(props) {
             })
 
         //비디오 가져오기
-        axios.post('/api/video/getVidoes', body)
+        axios.post('/api/video/search', body)
             .then(res => {
                 if (res.data.success) {
                     console.log("현재 비디오", res.data);
-                    setVideo(res.data.videos)
+                    videoSearched = videoSearched.concat(res.data.video)
+                    setVideo(videoSearched)
+                    console.log("현재 비디오 state", Video)
                 } else {
                     alert("현재 전시 비디오 가져오기를 실패했습니다.")
                 }
             })
-
-        // axios.get('/api/image/getImages')
-        //     .then(response => {
-        //       if(response.data.success){
-        //           setImage(response.data.images)
-        //       }else{
-        //         alert('image 가져오기를 실패했습니다.');
-        //       }
-        //     })
+            .catch(err => {
+                console.log("에러 비디오", err.response)
+            })
 
     }, [props.alignType])
 
@@ -70,11 +64,14 @@ function ResultBooths(props) {
             return "err"
         }
 
+        console.log("부스 state 상태", Booths)
+        console.log("sort", sort)
+
         switch (sort) {
             case "current":
                 var current = Booths.filter((v) => {
-                    var start = new Date(v.boothStart)
-                    var end = new Date(v.boothEnd)
+                    var start = new Date(v.startDate)
+                    var end = new Date(v.endDate)
 
                     if (start.getTime() < now.getTime()) {
                         if (end.getTime() > now.getTime()) {
@@ -95,8 +92,8 @@ function ResultBooths(props) {
 
             case "past":
                 var past = Booths.filter((v) => {
-                    var start = new Date(v.boothStart)
-                    var end = new Date(v.boothEnd)
+                    var start = new Date(v.startDate)
+                    var end = new Date(v.endDate)
 
                     if (end.getTime() < now.getTime()) { return v }
                 })
@@ -105,7 +102,7 @@ function ResultBooths(props) {
 
             case "future":
                 var future = Booths.filter((v) => {
-                    var start = new Date(v.boothStart)
+                    var start = new Date(v.startDate)
 
                     if (start.getTime() > now.getTime()) {
                         return v;
@@ -120,8 +117,6 @@ function ResultBooths(props) {
     //비디오 정렬 및 레이아웃 생성
     const alignVideo = () => {
         switch (props.alignType) {
-            case "recommend":
-                break;
             case "date":
                 Video.sort(function (a, b) {
                     return a.createAt < b.createAt ? -1 : a.createAt > b.createAt ? 1 : 0;
@@ -133,59 +128,45 @@ function ResultBooths(props) {
                 })
                 break;
         }
-    }
-        const renderCards = Video.map((video, index)=>{
-            var minutes = Math.floor(video.duration / 60);
-            var seconds = Math.floor(video.duration - minutes * 60);
-        
-            return <Col lg={6} md={8} xs={24} key={index}>
+
+        console.log("렌더카드 전 비디오 state", Video)
+
+        var renderCards = Video.map((video, index) => {
+
+            let minutes = Math.floor(video.duration / 60);
+            let seconds = Math.floor(video.duration - minutes * 60);
+            return (
+                <Col lg={6} md={8} xs={24} key={index}>
                     <div style={{ position: 'relative' }}>
-                        <a href={`/video/${video._id}`} >
-                        <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
-                        <div className=" duration"
-                            style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
-                            color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
-                            padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
-                            fontWeight:'500', lineHeight:'12px' }}>
-                            <span>{minutes} : {seconds}</span>
-                        </div>
+                        <a href={`/video/${video._id}`}>
+                            <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                            <div style={{
+                                bottom: 0, right: 0, position: 'absolute', margin: '4px',
+                                color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
+                                padding: '2px 4px', borderRadius: '2px', letterSpacing: '0.5px', fontSize: '12px',
+                                fontWeight: '500', lineHeight: '12px'
+                            }}
+                            >
+                                <span>{minutes} : {seconds}</span>
+                            </div>
                         </a>
-                    </div><br />
-                    <Meta
-                        avatar={
-                            <Avatar src={video.writer.image} />
-                        }
+                    </div>
+                    <br />
+                    <Card.Meta
+                        avatar={<Avatar src={video.writer.image} />}
                         title={video.title}
                     />
-                    <span>{video.writer.name} </span><br />
-                    <span style={{ marginLeft: '3rem' }}> {video.views}</span>
-                    - <span> {moment(video.createdAt).format("YYYY-MM-DD")} </span>
+                    <span>{video.writer.name}</span><br />
+                    <span style={{ marginLeft: '3rem' }}>{video.views} views</span> - <span>{moment(video.createdAt).format("MMM Do YY")}</span>
                 </Col>
-          })
-          const renderImageCards = Image.map((image, index)=>{
-            return <Col lg={6} md={8} xs={24} key={index}>
-                    <div style={{ position: 'relative' }}>
-                        <a href={`/post/${image._id}`} >
-                        <img style={{ width: '100%' }} src={`http://localhost:5000/${image.filePath[0]}`}/>
-                        <div className=" duration"
-                            style={{ bottom: 0, right:0, position: 'absolute', margin: '4px',
-                            color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8,
-                            padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
-                            fontWeight:'500', lineHeight:'12px' }}>
-                        </div>
-                        </a>
-                    </div><br />
-                    <Meta
-                        avatar={
-                            <Avatar src={image.writer.image} />
-                        }
-                        title={image.title}
-                    />
-                    <span>{image.writer.name} </span><br />
-                    <span style={{ marginLeft: '3rem' }}> {image.views}</span>
-                    - <span> {moment(image.createdAt).format("YYYY-MM-DD")} </span>
-                </Col>
-          })
+
+            )
+        })
+
+        console.log("renderCards", renderCards)
+
+        return renderCards
+    }
 
     //부스 정렬
     const alignBooths = (booths) => {
@@ -195,33 +176,7 @@ function ResultBooths(props) {
         console.log("change Align", props.alignType)
 
         switch (props.alignType) {
-            case "recommend":
-                booths.sort(function (a, b) {
-
-                    var aLike = 0
-                    var bLike = 0
-
-                    let body = {
-                        boothId: a._id
-                    }
-
-                    axios.post('api/like/getLikes', body)
-                        .then(res => {
-                            aLike = res.data.likes.length
-                        })
-
-                    body = {
-                        boothId: b._id
-                    }
-
-                    axios.post('api/like/getLikes', body)
-                        .then(res => {
-                            bLike = res.data.likes.length
-                        })
-
-
-                })
-                break;
+            
             case "date":
                 booths.sort(function (a, b) {
                     let aDate = new Date(a.boothStart)
@@ -246,7 +201,7 @@ function ResultBooths(props) {
         var _booths = [];
 
         if (sort === "current") {
-            var tmp = sortBooths(sort, Booths)
+            var tmp = sortBooths(sort)
             _booths = alignBooths(tmp)
         } else if (sort === "future") {
             var tmp = sortBooths(sort, Booths)
@@ -277,7 +232,7 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i].title}</p>
-                                <p>{_booths[i].boothStart} ~ {_booths[i].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
                             </Card>
                         </Col>
                         <Col>
@@ -288,7 +243,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 1].title}</p>
-                                <p>{_booths[i + 1].boothStart} ~ {_booths[i + 1].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -300,7 +256,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 2].title}</p>
-                                <p>{_booths[i + 2].boothStart} ~ {_booths[i + 2].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -312,7 +269,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 3].title}</p>
-                                <p>{_booths[i + 3].boothStart} ~ {_booths[i + 3].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -330,7 +288,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i].title}</p>
-                                <p>{_booths[i].boothStart} ~ {_booths[i].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -342,7 +301,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 1].title}</p>
-                                <p>{_booths[i + 1].boothStart} ~ {_booths[i + 1].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -354,7 +314,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 2].title}</p>
-                                <p>{_booths[i + 2].boothStart} ~ {_booths[i + 2].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -375,7 +336,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i].title}</p>
-                                <p>{_booths[i].boothStart} ~ {_booths[i].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
                             </Card>
                         </Col>
                         <Col>
@@ -386,7 +348,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i + 1].title}</p>
-                                <p>{_booths[i + 1].boothStart} ~ {_booths[i + 1].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -410,7 +373,8 @@ function ResultBooths(props) {
                                 bordered={false}
                             >
                                 <p>{_booths[i].title}</p>
-                                <p>{_booths[i].boothStart} ~ {_booths[i].boothEnd}</p>
+                                <p>{_booths[i].startDate} ~ {_booths[i].endDate}</p>
+
 
                             </Card>
                         </Col>
@@ -439,7 +403,7 @@ function ResultBooths(props) {
                 justifyContent: 'center',
             }}>
                 <div style={{ width: "1200px" }}>
-                    {alignVideo()}{renderCards}
+                    {alignVideo()}
                 </div>
             </div>
             <Divider style={{ margin: "50px 0 70px 0" }}>현재 아트</Divider>
@@ -448,7 +412,7 @@ function ResultBooths(props) {
                 justifyContent: 'center',
             }}>
                 <div style={{ width: "1200px" }}>
-                    {boothsLayout("current")}{renderImageCards}
+                    {boothsLayout("current")}
                 </div>
             </div>
 

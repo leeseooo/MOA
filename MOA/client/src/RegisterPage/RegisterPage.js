@@ -3,10 +3,6 @@ import { Input, Button } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../_actions/user_actions';
-<<<<<<< HEAD
-import moment from 'moment';
-=======
->>>>>>> cc58a973a2cc2a5d7c309aef5619fcd6fec24cbb
 
 
 function RegisterPage(props) {
