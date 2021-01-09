@@ -10,12 +10,6 @@ import Auth from "./hoc/auth";
 import Axios from 'axios'
 
 function App() {
-
-  useEffect(() => {
-    Axios.get('/api/hello')
-      .then((res) => console.log(res))
-  }, [])
-
   return (
     <div>
       <Switch>
