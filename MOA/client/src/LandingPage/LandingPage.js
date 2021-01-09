@@ -7,7 +7,7 @@ const { Title } = Typography;
 function LandingPage(){
     return(
         <div>
-            <select onChange>
+            <select >
                 {/* 카테고리 */}
             </select><br /><br />
             <div>

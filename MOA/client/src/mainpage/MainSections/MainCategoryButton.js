@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import './MainCategoryButton.css';
-import '../MainPage.css';
+import '../Mainpage.css';
 
 
 const MainCategoryButton=()=>{
