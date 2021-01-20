@@ -10,13 +10,13 @@ function PlannedExhibitPage() {
 
     useEffect(() => {
         
-        Axios.get('/api/video/getPlannedVidoes')
+        Axios.get('/api/image/getPlannedPerforms')
             .then(res => {
                 if (res.data.success) {
                     console.log(res.data);
                     setPlannedVideo(res.data.videos)
                 } else {
-                    alert("예정 전시 비디오 가져오기를 실패했습니다.")
+                    alert("예정 전시 가져오기를 실패했습니다.")
                 }
         })
 
@@ -26,11 +26,11 @@ function PlannedExhibitPage() {
 
         return (
             <Col lg={6} md={8} xs={24} key={index}>
-                <a href={`/video/${video._id}`}>
+                <a href={`/post/${video._id}`}>
                 <Card
                     hoverable
                     style={{ width: 200, borderBottom: "1px solid black" }}
-                    cover={<img alt={video.title} src={`http://localhost:5000/${video.thumbnail}`} className="Preview" />}
+                    cover={<img alt={video.title} src={`http://localhost:5000/${video.filePath}`} className="Preview" />}
                     bordered={false}
                 >
                     <p>{video.title}</p>
@@ -45,7 +45,7 @@ function PlannedExhibitPage() {
     return (
         <>
             <div className="moalook" >
-                <p>예정전시</p>
+                <p className="nowwhat">예정전시</p>
             </div>
             <div style={{ width: '85%', margin: '3rem auto', paddingBottom: '3rem' }}>
                 <Row gutter={[32, 16]}>

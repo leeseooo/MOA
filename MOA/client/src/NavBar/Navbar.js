@@ -40,14 +40,14 @@ function Navbar(props){
                 {
                     (user.userData && !user.userData.isAuth) ?
                     <Link to='/login'><button  className="loginbutton" >login</button></Link> :
-                    <button style={{marginLeft:'90%'}} className="loginbutton" onClick={handleLogout}>logout</button>
+                    <button style={{marginLeft:'0%'}} className="loginbutton" onClick={handleLogout}>logout</button>
                 }
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className='nav-menu-items' onClick={showSidebar}>
                 <li className="navbar-toggle">
                     <Link to="#" className='menu-bars'>
-                        <AiIcons.AiOutlineClose/>
+                        <AiIcons.AiOutlineClose style={{color:"#F3868D"}}/>
                     </Link>
                 </li>
                 {SidebarData.map((item,index) =>{

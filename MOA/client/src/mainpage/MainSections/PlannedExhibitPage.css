@@ -3,3 +3,21 @@
     height: 250px;
     object-fit: cover;
 }
+
+.moalook{
+    width: cover;
+    height:370px;
+    display: inline-block;
+    justify-content:center;
+    align-items:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+  }
+
+  .nowwhat{
+    font-size: 45px;
+    font-weight: 700;
+    text-align: center;
+    margin:0 auto; 
+  }

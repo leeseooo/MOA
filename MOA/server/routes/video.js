@@ -167,6 +167,17 @@ router.get('/getCurrentVidoes', (req, res) => {
         })
 })
 
+router.get('/getPlannedVideos', (req, res) => {
+    let now = getCurrentDate();
+    console.log(now);
+    Video.find({ 'startDate': {'$gt': now} })
+        .populate('writer')
+        .exec((err, videos) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+})
+
 router.post('/search', (req, res) => {
     Video.find({ 
         title : {'$regex': req.body.query, '$options': 'i' }})

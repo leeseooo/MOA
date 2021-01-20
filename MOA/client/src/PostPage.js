@@ -7,6 +7,7 @@ import moment from 'moment';
 function PostPage(props){
 
   const imageId = props.match.params.imageId
+
   const [Image, setImage] = useState([]);
   const [CommentLists, setCommentLists] = useState([])
   const [current, setCurrent]=useState(1)
@@ -20,8 +21,10 @@ function PostPage(props){
   const fileLength=file.length
 
   useEffect(()=>{
-    Axios.post('/api/image/getImageDetail', imageVariable)
+    console.log('ok')
+    Axios.post('/api/image/getImageDetail', imageVariable)    
         .then(response => {
+            console.log(imageId);
             if (response.data.success) {
                 setImage(response.data.image)
                 console.log("이미지아이디:",imageId)

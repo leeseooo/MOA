@@ -74,7 +74,7 @@ function MainLivePage(){
     return (
         <div className='mainpage_below' style={{textAlign:'center', backgroundSize:'cover'}} height="100vh">
             
-            <p className="streamlive">실시간 방송 LIVE</p>
+            <p className="streamlive">실시간 LIVE 공연</p>
             <p className="meetinlive">전국의 대학생 활동을 라이브 방송으로 만나보세요</p>
             <AiIcons.AiOutlineLeftSquare size="40" color="#C692B8"  className="livevideoleft" onClick={movel}/>
             <AiIcons.AiFillRightSquare size="40" color="#C692B8" className="livevideoright" onClick={mover}/>

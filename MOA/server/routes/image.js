@@ -25,9 +25,46 @@ const upload = multer({ storage: storage }).single("file")
 
 
 //=================================
-//             User
+//             Image
 //=================================
 
+
+const getCurrentDate = () => {
+    let date = new Date();
+
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let today = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let milliseconds = date.getMilliseconds();
+
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+}
+
+router.get('/getCurrentPerforms', (req, res) => {
+    let now = getCurrentDate();
+    console.log(now);
+    Image.find({ 'startDate': {'$lte': now}, 'endDate': {'$gte': now} })
+        .populate('writer')
+        .exec((err, videos) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+})
+
+
+router.get('/getPlannedPerforms', (req, res) => {
+    let now = getCurrentDate();
+    console.log(now);
+    Image.find({ 'startDate': {'$gt': now} })
+        .populate('writer')
+        .exec((err, videos) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+})
 
 router.post("/uploadFiles", (req, res) => {
 
@@ -39,6 +76,8 @@ router.post("/uploadFiles", (req, res) => {
     })
 
 })
+
+
 
 router.get("/getImages", (req, res) => {
 
