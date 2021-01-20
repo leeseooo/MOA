@@ -22,7 +22,6 @@ function MainLivePage(){
         })
     }, [])
 
-
     let liveRenderCards = [];
     if (liveVideo !== 0) {
         liveRenderCards = liveVideo.map((video, index) => {

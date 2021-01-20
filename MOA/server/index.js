@@ -40,6 +40,7 @@ app.use('/api/chat', require('./routes/chat'));
 
 app.use('/uploads', express.static('uploads'));
 
+
 let broadcaster;
 io.on('connection', socket => {
 
